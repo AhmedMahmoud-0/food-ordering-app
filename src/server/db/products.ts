@@ -18,7 +18,6 @@ export const getProductsByCategory = cache(
   ["products-by-category"],
   { Revalidate: 3600 },
 );
-
 export const getBestSellers = cache(
   (limit?: number | undefined) => {
     const bestSellers = db.product.findMany({
@@ -41,5 +40,35 @@ export const getBestSellers = cache(
     return bestSellers;
   },
   ["best-sellers"],
+  { Revalidate: 3600 },
+);
+
+export const getProducts = cache(
+  () => {
+    const products = db.product.findMany({
+      orderBy: {
+        order: "asc",
+      },
+    });
+    return products;
+  },
+  ["products"],
+  { Revalidate: 3600 },
+);
+
+export const getProduct = cache(
+  (id: string) => {
+    const product = db.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        sizes: true,
+        extras: true,
+      },
+    });
+    return product;
+  },
+  [`product-${crypto.randomUUID()}`],
   { Revalidate: 3600 },
 );
