@@ -5,7 +5,6 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { withAuth } from "next-auth/middleware";
 import { getToken } from "next-auth/jwt";
 import { Pages, Routes } from "./constants/enums";
-import { UserRole } from "@prisma/client";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -63,7 +62,7 @@ export default withAuth(
     // if user loggedin and try to acess auth routes
     if (isAuthPage && isAuth) {
       const role = isAuth.role;
-      if (role === UserRole.ADMIN) {
+      if (role === "ADMIN") {
         return NextResponse.redirect(
           new URL(`/${currentLocale}/${Routes.ADMIN}`, request.url),
         );
@@ -72,7 +71,7 @@ export default withAuth(
     // if user loggedin and he isn't admin and try to acess admin route
     if (isAuth && pathname.startsWith(`/${currentLocale}/${Routes.ADMIN}`)) {
       const role = isAuth.role;
-      if (role !== UserRole.ADMIN) {
+      if (role === "ADMIN") {
         return NextResponse.redirect(
           new URL(`/${currentLocale}/${Routes.PROFILE}`, request.url),
         );
