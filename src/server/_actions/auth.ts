@@ -90,6 +90,7 @@ export const signup = async (prevState: unknown, formData: FormData) => {
         password: hashedPassword,
       },
     });
+
     revalidatePath(`/${locale}/${Routes.ADMIN}/${Pages.USERS}`);
     revalidatePath(
       `/${locale}/${Routes.ADMIN}/${Pages.USERS}/${createdUser.id}/${Pages.EDIT}`,
@@ -97,11 +98,7 @@ export const signup = async (prevState: unknown, formData: FormData) => {
     return {
       status: 201,
       message: translations.messages.accountCreated,
-      user: {
-        id: createdUser.id,
-        name: createdUser.name,
-        email: createdUser.email,
-      },
+      formData,
     };
   } catch (error) {
     console.error(error);

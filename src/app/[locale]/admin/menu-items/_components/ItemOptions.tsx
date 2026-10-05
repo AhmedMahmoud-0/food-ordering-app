@@ -96,17 +96,18 @@ function ItemOptions({
             return (
               <li key={index} className="flex gap-2 mb-2">
                 <div className="space-y-1 basis-1/2">
-                  <Label>name</Label>
+                  <Label>{translations.admin["menu-items"].name}</Label>
                   <SelectName
                     item={item}
                     onChange={onChange}
                     index={index}
                     currentState={state}
                     optionKey={optionKey}
+                    translations={translations}
                   />
                 </div>
                 <div className="space-y-1 basis-1/2">
-                  <Label>Extra Price</Label>
+                  <Label>{translations.admin["menu-items"].extraPrice}</Label>
                   <Input
                     type="number"
                     placeholder="0"
@@ -157,11 +158,13 @@ const SelectName = ({
   item,
   currentState,
   optionKey,
+  translations,
 }: {
   index: number;
   item: Partial<Size> | Partial<Extra>;
   currentState: Partial<Size>[] | Partial<Extra>[];
   optionKey: ItemOptionsKeys;
+  translations: Translations;
   onChange: (e: any, index: any, fieldName: any) => void;
 }) => {
   const { locale } = useParams();
@@ -194,14 +197,18 @@ const SelectName = ({
       onValueChange={(value) => {
         onChange({ target: { value } }, index, "name");
       }}
-      defaultValue={item.name ? item.name : "select..."}
+      defaultValue={
+        item.name ? item.name : translations.admin["menu-items"].select
+      }
     >
       <SelectTrigger
         className={` bg-white border-none mb-4 focus:ring-0 ${
           locale === Languages.ARABIC ? "flex-row-reverse" : "flex-row"
         }`}
       >
-        <SelectValue>{item.name ? item.name : "select..."}</SelectValue>
+        <SelectValue>
+          {item.name ? item.name : translations.admin["menu-items"].select}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent className="bg-transparent border-none z-50">
         <SelectGroup className="bg-background text-accent z-50">

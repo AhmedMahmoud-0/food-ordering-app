@@ -6,10 +6,10 @@ async function AdminLayout({
   params,
   children,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
   children: React.ReactNode;
 }) {
-  const locale = (await params).locale;
+  const locale = (await params).locale as Locale;
   const translations = await getTrans(locale);
   return (
     <>

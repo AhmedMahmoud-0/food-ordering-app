@@ -21,7 +21,7 @@ const useFormFields = ({ slug, translations }: Props) => {
       placeholder: translations.auth.login.password.placeholder,
     },
   ];
-  const sigmupFields = (): IFormField[] => [
+  const signupFields = (): IFormField[] => [
     {
       label: translations.auth.register.name.label,
       name: "name",
@@ -123,11 +123,12 @@ const useFormFields = ({ slug, translations }: Props) => {
       case Pages.LOGIN:
         return loginFields();
       case Pages.Register:
-        return sigmupFields();
+        return signupFields();
       case Routes.PROFILE:
         return profileFields();
       case `${Routes.ADMIN}/${Pages.MENU_ITEMS}`:
         return addProductFields();
+
       default:
         return [];
     }

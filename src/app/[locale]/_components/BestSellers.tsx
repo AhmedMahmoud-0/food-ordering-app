@@ -7,8 +7,9 @@ import { getBestSellers } from "@/server/db/products";
 async function BestSellers() {
   const bestSellers = await getBestSellers(3);
   const locale = await getCurrentLocale();
-  const { home } = await getTrans(locale);
-  const { bestSeller } = home;
+  const translations = await getTrans(locale);
+  const { bestSeller } = translations.home;
+
   return (
     <section>
       <div className="container">
@@ -18,7 +19,7 @@ async function BestSellers() {
             title={bestSeller.OurBestSellers}
           />
         </div>
-        <Menu items={bestSellers} />
+        <Menu items={bestSellers} translations={translations} />
       </div>
     </section>
   );

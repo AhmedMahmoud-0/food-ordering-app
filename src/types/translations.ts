@@ -80,6 +80,10 @@ export type Translations = {
   };
   menuItem: {
     addToCart: string;
+    pickYourSize: string;
+    anyExtras: string;
+    inCart: string;
+    remove: string;
   };
   messages: {
     userNotFound: string;
@@ -98,9 +102,51 @@ export type Translations = {
     updateUserSucess: string;
     deleteUserSucess: string;
   };
+  checkout: {
+    title: string;
+    phone: string;
+    address: string;
+    building: string;
+    city: string;
+    notes: string;
+    submit: string;
+    processing: string;
+    validation: {
+      phoneRequired: string;
+      phoneInvalid: string;
+      addressRequired: string;
+      addressInvalid: string;
+      buildingRequired: string;
+      cityRequired: string;
+    };
+    messages: {
+      cartEmpty: string;
+      orderCreated: string;
+      orderFailed: string;
+      orderNotFound: string;
+      alreadyPaid: string;
+      paymentSuccess: string;
+      paymentFailed: string;
+    };
+  };
   cart: {
     title: string;
     noItemsInCart: string;
+    subtotal: string;
+    delivery: string;
+    total: string;
+    emptyCart: string;
+    size: string;
+    extras: string;
+  };
+  orders: {
+    title: string;
+    orderId: string;
+    date: string;
+    total: string;
+    payment: string;
+    status: string;
+    noOrders: string;
   };
   profile: {
     title: string;
@@ -134,10 +180,63 @@ export type Translations = {
         };
       };
     };
+    orders: {
+      items: string;
+      statusUpdateSuccess: string;
+      statusUpdateError: string;
+      title: string;
+      orderId: string;
+      customer: string;
+      date: string;
+      total: string;
+      payment: string;
+      status: string;
+      noOrders: string;
+      details: {
+        title: string;
+        orderId: string;
+        createdAt: string;
+        customer: string;
+        name: string;
+        email: string;
+        phone: string;
+        address: string;
+        building: string;
+        city: string;
+        notes: string;
+        items: string;
+        size: string;
+        extras: string;
+        quantity: string;
+        unitPrice: string;
+        subtotal: string;
+        deliveryFee: string;
+        total: string;
+        paymentStatus: string;
+        orderStatus: string;
+        notAvailable: string;
+        paymentStatuses: {
+          PENDING: string;
+          PAID: string;
+          FAILED: string;
+        };
+        statuses: {
+          PENDING: string;
+          CONFIRMED: string;
+          PREPARING: string;
+          OUT_FOR_DELIVERY: string;
+          DELIVERED: string;
+          CANCELLED: string;
+        };
+      };
+    };
     "menu-items": {
       addItemSize: string;
       createNewMenuItem: string;
       addExtraItem: string;
+      name: string;
+      extraPrice: string;
+      select: string;
       menuOption: {
         name: string;
         extraPrice: string;
@@ -176,6 +275,18 @@ export type Translations = {
         };
       };
     };
+  };
+  products: {
+    categories: Record<string, string>;
+    sizes: Record<string, string>;
+    extras: Record<string, string>;
+    items: Record<
+      string,
+      {
+        name: string;
+        description: string;
+      }
+    >;
   };
   sizes: string;
   extrasIngredients: string;

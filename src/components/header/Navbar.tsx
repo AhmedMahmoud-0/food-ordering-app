@@ -45,7 +45,9 @@ function Navbar({
       href: Routes.CONTACT,
     },
   ];
+
   const isAdmin = session.data?.user.role === UserRole.ADMIN;
+
   return (
     <nav className="order-last lg:order-0">
       <Button
@@ -56,6 +58,7 @@ function Navbar({
       >
         <Menu className="w-6! h-6!" />
       </Button>
+
       <ul
         className={`fixed lg:static ${
           openMenu ? "left-0 z-50" : "-left-full"
@@ -69,6 +72,7 @@ function Navbar({
         >
           <XIcon className="w-6! h-6!" />
         </Button>
+
         {links.map((link) => (
           <li key={link.id}>
             <Link
@@ -84,31 +88,51 @@ function Navbar({
             </Link>
           </li>
         ))}
+
         {session.data?.user && (
-          <li>
-            <Link
-              href={
-                isAdmin
-                  ? `/${locale}/${Routes.ADMIN}`
-                  : `/${locale}/${Routes.PROFILE}`
-              }
-              onClick={() => setOpenMenu(false)}
-              className={`${
-                pathname.startsWith(
+          <>
+            <li>
+              <Link
+                href={
                   isAdmin
                     ? `/${locale}/${Routes.ADMIN}`
-                    : `/${locale}/${Routes.PROFILE}`,
-                )
-                  ? "text-primary"
-                  : "text-accent"
-              } hover:text-primary duration-200 transition-colors font-semibold`}
-            >
-              {isAdmin
-                ? translations.navbar.admin
-                : translations.navbar.profile}
-            </Link>
-          </li>
+                    : `/${locale}/${Routes.PROFILE}`
+                }
+                onClick={() => setOpenMenu(false)}
+                className={`${
+                  pathname.startsWith(
+                    isAdmin
+                      ? `/${locale}/${Routes.ADMIN}`
+                      : `/${locale}/${Routes.PROFILE}`,
+                  )
+                    ? "text-primary"
+                    : "text-accent"
+                } hover:text-primary duration-200 transition-colors font-semibold`}
+              >
+                {isAdmin
+                  ? translations.navbar.admin
+                  : translations.navbar.profile}
+              </Link>
+            </li>
+
+            {!isAdmin && (
+              <li>
+                <Link
+                  href={`/${locale}/orders`}
+                  onClick={() => setOpenMenu(false)}
+                  className={`${
+                    pathname.startsWith(`/${locale}/orders`)
+                      ? "text-primary"
+                      : "text-accent"
+                  } hover:text-primary duration-200 transition-colors font-semibold`}
+                >
+                  {translations.orders.title}
+                </Link>
+              </li>
+            )}
+          </>
         )}
+
         <li className="lg:hidden flex flex-col gap-4">
           <div onClick={() => setOpenMenu(false)}>
             <AuthButtons

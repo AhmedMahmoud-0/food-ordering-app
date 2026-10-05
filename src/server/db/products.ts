@@ -40,7 +40,7 @@ export const getBestSellers = cache(
     return bestSellers;
   },
   ["best-sellers"],
-  { Revalidate: 3600 },
+  { Revalidate: 3600, tags: ["best-sellers"] },
 );
 
 export const getProducts = cache(

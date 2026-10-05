@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -24,44 +25,80 @@ import {
   selectCartItems,
 } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { gitItemQuantity } from "@/lib/cart";
+import { getCartItem } from "@/lib/cart";
+import { Translations } from "@/types/translations";
 
-function AddToCartButton({ item }: { item: ProductWithRelations }) {
+function AddToCartButton({
+  item,
+  translations,
+}: {
+  item: ProductWithRelations;
+  translations: Translations;
+}) {
   const cart = useAppSelector(selectCartItems);
-  const quantity = gitItemQuantity(item.id, cart);
   const dispatch = useAppDispatch();
+
   const defaultSize =
-    cart.find((element) => element.id === item.id)?.size ||
-    item.sizes.find((size) => size.name === ProductSizes.SMALL);
-  const defaultExtras =
-    cart.find((element) => element.id === item.id)?.extras || [];
+    item.sizes.find((size) => size.name === ProductSizes.SMALL) ??
+    item.sizes[0];
+
   const [selectedSize, setSelectedSize] = useState<Size>(defaultSize!);
-  const [selectedExtras, setSelectedExtras] = useState<Extra[]>(defaultExtras);
+  const [selectedExtras, setSelectedExtras] = useState<Extra[]>([]);
+  const [open, setOpen] = useState(false);
+
+  const currentCartItem = getCartItem(
+    item.id,
+    selectedSize.id,
+    selectedExtras.map((extra) => extra.id),
+    cart,
+  );
+
+  const quantity = currentCartItem?.quantity ?? 0;
 
   let totalPrice = item.basePrice;
+
   if (selectedSize) {
     totalPrice += selectedSize.price;
   }
+
   if (selectedExtras.length > 0) {
     for (const extra of selectedExtras) {
       totalPrice += extra.price;
     }
   }
 
+  const resetSelection = () => {
+    setSelectedSize(defaultSize!);
+    setSelectedExtras([]);
+  };
+
   const handleAddToCart = () => {
     dispatch(
       addCartItem({
-        basePrice: item.basePrice,
         id: item.id,
+        productId: item.id,
+        basePrice: item.basePrice,
         image: item.image,
         name: item.name,
         size: selectedSize,
         extras: selectedExtras,
       }),
     );
+
+    setOpen(false);
   };
+
   return (
-    <Dialog>
+    <Dialog
+      open={open}
+      onOpenChange={(value) => {
+        setOpen(value);
+
+        if (value) {
+          resetSelection();
+        }
+      }}
+    >
       <form>
         <DialogTrigger
           render={
@@ -70,49 +107,63 @@ function AddToCartButton({ item }: { item: ProductWithRelations }) {
               size="lg"
               className="mt-4 text-white rounded-full px-8!"
             >
-              <span>Add to cart</span>
+              <span>{translations.menuItem.addToCart}</span>
             </Button>
           }
         />
-        <DialogContent className="sm:max-w-[425px ] max-h-[80vh] overflow-y-auto ">
+
+        <DialogContent className="sm:max-w-106.25 max-h-[80vh] overflow-y-auto">
           <DialogHeader className="flex items-center">
             <Image src={item.image} alt={item.name} width={200} height={200} />
-            <DialogTitle>{item.name}</DialogTitle>
+
+            <DialogTitle>
+              {translations.products.items[item.id]?.name ?? item.name}
+            </DialogTitle>
+
             <DialogDescription className="text-center">
-              {item.description}
+              {translations.products.items[item.id]?.description ??
+                item.description}
             </DialogDescription>
           </DialogHeader>
+
           <div className="space-y-10">
             <div className="space-y-4 text-center">
               <Label htmlFor="pick-size" className="block">
-                Pick Your Size
+                {translations.menuItem.pickYourSize}
               </Label>
+
               <PickSize
                 sizes={item.sizes}
                 item={item}
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}
+                translations={translations}
               />
             </div>
+
             <div className="space-y-4 text-center">
               <Label htmlFor="add-extras" className="block">
-                Any extras?
+                {translations.menuItem.anyExtras}
               </Label>
+
               <Extras
                 extras={item.extras}
                 selectedExtras={selectedExtras}
                 setSelectedExtras={setSelectedExtras}
+                translations={translations}
               />
             </div>
           </div>
+
           <DialogFooter>
             {quantity === 0 ? (
               <Button
-                type="submit"
+                type="button"
                 onClick={handleAddToCart}
                 className="w-full h-10"
               >
-                Add to cart{formatCurrency(totalPrice)}
+                {translations.menuItem.addToCart}
+                {formatCurrency(totalPrice)}
               </Button>
             ) : (
               <ChooseQuantity
@@ -120,6 +171,8 @@ function AddToCartButton({ item }: { item: ProductWithRelations }) {
                 item={item}
                 selectedSize={selectedSize}
                 selectedExtras={selectedExtras}
+                cartItemId={currentCartItem!.id}
+                translations={translations}
               />
             )}
           </DialogFooter>
@@ -136,10 +189,12 @@ function PickSize({
   item,
   selectedSize,
   setSelectedSize,
+  translations,
 }: {
   sizes: Size[];
   selectedSize: Size;
   item: ProductWithRelations;
+  translations: Translations;
   setSelectedSize: React.Dispatch<React.SetStateAction<Size>>;
 }) {
   return (
@@ -147,7 +202,10 @@ function PickSize({
       value={selectedSize.id}
       onValueChange={(value) => {
         const size = sizes.find((size) => size.id === value);
-        if (size) setSelectedSize(size);
+
+        if (size) {
+          setSelectedSize(size);
+        }
       }}
       className="flex flex-col gap-3 w-full max-w-xs mx-auto"
     >
@@ -158,12 +216,15 @@ function PickSize({
             id={size.id}
             className="border-primary text-primary focus-visible:ring-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
           />
-          {/* 👇 تحويل الـ Label لـ flex وتوزيع الاسم والسعر على الأطراف بدقة */}
+
           <Label
             onClick={() => setSelectedSize(size)}
             className="flex-1 flex justify-between items-center cursor-pointer font-medium text-sm"
           >
-            <span className="capitalize">{size.name}</span>
+            <span className="capitalize">
+              {translations.products.sizes[size.id] ?? size.name}
+            </span>
+
             <span className="text-muted-foreground">
               {formatCurrency(+size.price + +item.basePrice)}
             </span>
@@ -178,9 +239,11 @@ function Extras({
   extras,
   selectedExtras,
   setSelectedExtras,
+  translations,
 }: {
   extras: Extra[];
   selectedExtras: Extra[];
+  translations: Translations;
   setSelectedExtras: React.Dispatch<React.SetStateAction<Extra[]>>;
 }) {
   const handleExtra = (extra: Extra) => {
@@ -190,6 +253,7 @@ function Extras({
       setSelectedExtras((prev) => [...prev, extra]);
     }
   };
+
   return extras.map((extra) => (
     <div
       key={extra.id}
@@ -201,11 +265,15 @@ function Extras({
         checked={Boolean(selectedExtras.find((e) => e.id === extra.id))}
         className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:ring-primary h-4 w-4 rounded"
       />
+
       <Label
         onClick={() => handleExtra(extra)}
         className="flex-1 flex justify-between items-center text-base text-foreground font-semibold cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
       >
-        <span className="capitalize">{extra.name}</span>
+        <span className="capitalize">
+          {translations.products.extras[extra.id] ?? extra.name}
+        </span>
+
         <span className="text-muted-foreground text-sm font-medium">
           {formatCurrency(extra.price)}
         </span>
@@ -219,32 +287,44 @@ const ChooseQuantity = ({
   item,
   selectedExtras,
   selectedSize,
+  cartItemId,
+  translations,
 }: {
   quantity: number;
   selectedExtras: Extra[];
   selectedSize: Size;
   item: ProductWithRelations;
+  cartItemId: string;
+  translations: Translations;
 }) => {
   const dispatch = useAppDispatch();
+
   return (
     <div className="flex items-center flex-col gap-2 mt-4 w-full">
       <div className="flex items-center justify-center gap-2">
         <Button
+          type="button"
           variant="outline"
-          onClick={() => dispatch(removeCartItem({ id: item.id }))}
+          onClick={() => dispatch(removeCartItem({ id: cartItemId }))}
         >
           -
         </Button>
+
         <div>
-          <span className="text-black">{quantity} in cart</span>
+          <span className="text-black">
+            {quantity} {translations.menuItem.inCart}
+          </span>
         </div>
+
         <Button
+          type="button"
           variant="outline"
           onClick={() =>
             dispatch(
               addCartItem({
-                basePrice: item.basePrice,
                 id: item.id,
+                productId: item.id,
+                basePrice: item.basePrice,
                 image: item.image,
                 name: item.name,
                 size: selectedSize,
@@ -256,11 +336,13 @@ const ChooseQuantity = ({
           +
         </Button>
       </div>
+
       <Button
+        type="button"
         size="sm"
-        onClick={() => dispatch(removeItemFromCart({ id: item.id }))}
+        onClick={() => dispatch(removeItemFromCart({ id: cartItemId }))}
       >
-        Remove
+        {translations.menuItem.remove}
       </Button>
     </div>
   );

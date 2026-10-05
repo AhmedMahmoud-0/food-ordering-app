@@ -43,7 +43,7 @@ function Form({ translations }: { translations: Translations }) {
     if (state.status === 201) {
       router.replace(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`);
     }
-  }, [locale, router, state.message, state.status]);
+  }, [locale, router, state.formData, state.message, state.status]);
   return (
     <form action={action}>
       {getFormFields().map((field: IFormField) => {

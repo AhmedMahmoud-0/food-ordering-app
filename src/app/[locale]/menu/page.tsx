@@ -14,9 +14,11 @@ async function MenuPage({ params }: { params: Promise<{ locale: Locale }> }) {
           <section key={category.id} className="section-gap">
             <div className="container text-center">
               <h1 className="text-primary font-bold text-4xl italic mb-6">
-                {category.name}
+                {translations.products.categories[
+                  category.id as keyof typeof translations.products.categories
+                ] ?? category.name}
               </h1>
-              <Menu items={category.products} />
+              <Menu items={category.products} translations={translations} />
             </div>
           </section>
         ))

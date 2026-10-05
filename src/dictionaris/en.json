@@ -108,7 +108,11 @@
     "deleteUserSucess": "User deleted successfull"
   },
   "menuItem": {
-    "addToCart": "Add to cart"
+    "addToCart": "Add to cart",
+    "pickYourSize": "Pick Your Size",
+    "anyExtras": "Any extras?",
+    "inCart": "in cart",
+    "remove": "Remove"
   },
   "profile": {
     "title": "Profile",
@@ -180,10 +184,63 @@
         }
       }
     },
+    "orders": {
+      "title": "Orders",
+      "items": "Items",
+      "statusUpdateSuccess": "Order status updated successfully",
+      "statusUpdateError": "Failed to update order status",
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "date": "Date",
+      "total": "Total",
+      "payment": "Payment",
+      "status": "Status",
+      "noOrders": "No orders",
+      "details": {
+        "title": "Order Details",
+        "orderId": "Order ID",
+        "createdAt": "Order Date",
+        "customer": "Customer Information",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "building": "Building / Apartment",
+        "city": "City / Area",
+        "notes": "Delivery Notes",
+        "items": "Items",
+        "size": "Size",
+        "extras": "Extras",
+        "quantity": "Quantity",
+        "unitPrice": "Unit Price",
+        "subtotal": "Subtotal",
+        "deliveryFee": "Delivery Fee",
+        "total": "Total",
+        "paymentStatus": "Payment Status",
+        "orderStatus": "Order Status",
+        "notAvailable": "Not available",
+        "paymentStatuses": {
+          "PENDING": "Pending",
+          "PAID": "Paid",
+          "FAILED": "Failed"
+        },
+        "statuses": {
+          "PENDING": "Pending",
+          "CONFIRMED": "Confirmed",
+          "PREPARING": "Preparing",
+          "OUT_FOR_DELIVERY": "Out for delivery",
+          "DELIVERED": "Delivered",
+          "CANCELLED": "Cancelled"
+        }
+      }
+    },
     "menu-items": {
       "createNewMenuItem": "Create new menu item",
       "addItemSize": "Add item size",
       "addExtraItem": "Add extra item",
+      "name": "Name",
+      "extraPrice": "Extra Price",
+      "select": "Select...",
       "menuOption": {
         "name": "Name",
         "extraPrice": "Extra Price"
@@ -233,7 +290,143 @@
   "create": "Create",
   "cart": {
     "title": "Shopping Cart",
-    "noItemsInCart": "There are no items in your cart. Add some"
+    "noItemsInCart": "There are no items in your cart. Add some",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "total": "Total",
+    "emptyCart": "There are no items in your cart. Add some",
+    "size": "Size",
+    "extras": "Extras"
+  },
+  "orders": {
+    "title": "My Orders",
+    "orderId": "Order ID",
+    "date": "Date",
+    "total": "Total",
+    "payment": "Payment",
+    "status": "Status",
+    "noOrders": "No orders"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "phone": "Phone number",
+    "address": "Street address",
+    "building": "Building / Apartment",
+    "city": "City / Area",
+    "notes": "Delivery notes",
+    "submit": "Pay",
+    "processing": "Processing...",
+    "validation": {
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Enter a valid phone number",
+      "addressRequired": "Street address is required",
+      "addressInvalid": "Enter a valid street address",
+      "buildingRequired": "Building or apartment is required",
+      "cityRequired": "City or area is required"
+    },
+    "messages": {
+      "cartEmpty": "Cart is empty",
+      "orderCreated": "Order created successfully",
+      "orderFailed": "Something went wrong while creating the order",
+      "orderNotFound": "Order not found",
+      "alreadyPaid": "Order is already paid",
+      "paymentSuccess": "Payment successful",
+      "paymentFailed": "Payment failed"
+    }
+  },
+  "products": {
+    "categories": {
+      "4aa5b5b1-f874-4fe3-a907-8a9a95039b91": "Meat Pizzas",
+      "8444194d-b0a5-413d-a762-83d2edd85006": "Chicken Pizzas"
+    },
+    "sizes": {
+      "cmuiuwxkf002uzsv2yw9zvfn2": "Small",
+      "cmuiuwxkg002vzsv2mbnjw7oh": "Medium",
+      "cmuiuwxkg002wzsv2smi4si63": "Large",
+
+      "cmuiuyegx003azsv23q98ti2z": "Small",
+      "cmuiuyeg003bzsv25ek714q1": "Medium",
+      "cmuiuyeg003czsv23h425p46": "Large",
+
+      "cmuiuwbga002mzsv259cyyctj": "Small",
+      "cmuiuwbgb002nzsv2bicugesm": "Medium",
+      "cmuiuwbgb002ozsv2x387kvqs": "Large",
+
+      "cmuiuxl8v0032zsv29dldek94": "Small",
+      "cmuiuxl8v0033zsv2wiopxhbq": "Medium",
+      "cmuiuxl8v0034zsv2m4c155np": "Large",
+
+      "cmuiuvfxa002ezsv2wt4tsobv": "Small",
+      "cmuiuvfxb002fzsv2mp6ezkzn": "Medium",
+      "cmuiuvfxb002gzsv2f0wueibw": "Large",
+
+      "cmuiuto9l0026zsv26tgd0bwm": "Small",
+      "cmuiuto9l0027zsv2vw4eqe4t": "Medium",
+      "cmuiuto9l0028zsv2jhd1oy04": "Large"
+    },
+    "extras": {
+      "cmuiuwxko002xzsv214z2wqy7": "Cheese",
+      "cmuiuwxko002yzsv2yllyokz4": "Bacon",
+      "cmuiuwxko002zzsv2lei87up8": "Onion",
+      "cmuiuwxko0030zsv2c0846imv": "Pepper",
+      "cmuiuwxko0031zsv26b8kglza": "Tomato",
+
+      "cmuiuyeh9003dzsv24ofwhbo6": "Cheese",
+      "cmuiuyeh9003ezsv2vnx0blet": "Bacon",
+      "cmuiuyeh9003fzsv20vx94op3": "Onion",
+      "cmuiuyeh9003gzsv26bwozsxr": "Pepper",
+      "cmuiuyeh9003hzsv2mac1hhia": "Tomato",
+
+      "cmuiuwbgo002pzsv2oe6yogok": "Cheese",
+      "cmuiuwbgo002qzsv23n7z5w3i": "Bacon",
+      "cmuiuwbgo002rzsv2u18er0l3": "Onion",
+      "cmuiuwbgo002szsv2b3rzz39h": "Pepper",
+      "cmuiuwbgo002tzsv2ca3uygfz": "Tomato",
+
+      "cmuiuxl960035zsv20tmdf7w4": "Cheese",
+      "cmuiuxl960036zsv2dp9oh43i": "Bacon",
+      "cmuiuxl960037zsv2tuyj7z0c": "Onion",
+      "cmuiuxl960038zsv2cqnnl7ef": "Pepper",
+      "cmuiuxl960039zsv260mcl3qf": "Tomato",
+
+      "cmuiuvfxi002hzsv2mc9vupr4": "Cheese",
+      "cmuiuvfxi002izsv2ay9zwrs4": "Bacon",
+      "cmuiuvfxi002jzsv2hvymh7pa": "Onion",
+      "cmuiuvfxi002kzsv2nttlz3fz": "Pepper",
+      "cmuiuvfxi002lzsv2gpuc8ydz": "Tomato",
+
+      "cmuiutoa60029zsv2go55tpsv": "Cheese",
+      "cmuiutoa7002azsv2mqefdeox": "Bacon",
+      "cmuiutoa7002bzsv2aoc6oa19": "Onion",
+      "cmuiutoa7002czsv25hsalrns": "Pepper",
+      "cmuiutoa7002dzsv2dzmo2zvi": "Tomato"
+    },
+    "items": {
+      "cmuiu7gtc000ozsv2m5o6kg5h": {
+        "name": "Double Pepperoni",
+        "description": "Tomato sauce - Double Pepperoni"
+      },
+      "cmuiu96y0000xzsv2jmu30qc1": {
+        "name": "Fire Smoky Beef",
+        "description": "Tomato sauce - Turkish meat - Green pepper - Olives - Fire sauce"
+      },
+      "cmuiuasus0016zsv2mwz9s356": {
+        "name": "Smoky Texas Burger",
+        "description": "BBQ sauce - Burger - Green pepper - Pickled cucumber - Onion - Smoky Texas sauce"
+      },
+      "cmuiue89l001fzsv2ulphujai": {
+        "name": "BBQ Chicken",
+        "description": "BBQ sauce - Onion - Green pepper - Red pepper - Chicken - BBQ sauce"
+      },
+      "cmuiuft9e001ozsv2iuebvsuh": {
+        "name": "Fire Chicken",
+        "description": "Tomato sauce - Chicken - Red pepper - Fire sauce"
+      },
+      "cmuiuh678001xzsv2wl47dt5d": {
+        "name": "Ranch Chicken",
+        "description": "Creamy cheese - Olives - Green pepper - Red pepper - Chicken - Ranch sauce"
+      }
+    }
   },
   "copyRight": "© 2026 All rights reserved",
   "noProductsFound": "No products found",

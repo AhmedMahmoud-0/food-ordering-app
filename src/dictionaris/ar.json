@@ -108,7 +108,11 @@
     "deleteUserSucess": "تم حذف المستخدم بنجاح"
   },
   "menuItem": {
-    "addToCart": "أضف الي العربة"
+    "addToCart": "أضف الي العربة",
+    "pickYourSize": "اختر الحجم",
+    "anyExtras": "هل تريد إضافات؟",
+    "inCart": "في السلة",
+    "remove": "حذف"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -180,10 +184,63 @@
         }
       }
     },
+    "orders": {
+      "title": "الطلبات",
+      "items": "المنتجات",
+      "statusUpdateSuccess": "تم تحديث حالة الطلب بنجاح",
+      "statusUpdateError": "تعذر تحديث حالة الطلب",
+      "orderId": "رقم الطلب",
+      "customer": "العميل",
+      "date": "التاريخ",
+      "total": "الإجمالي",
+      "payment": "الدفع",
+      "status": "الحالة",
+      "noOrders": "لا توجد طلبات",
+      "details": {
+        "title": "تفاصيل الطلب",
+        "orderId": "رقم الطلب",
+        "createdAt": "تاريخ الطلب",
+        "customer": "بيانات العميل",
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "address": "العنوان",
+        "building": "المبنى / الشقة",
+        "city": "المدينة / المنطقة",
+        "notes": "ملاحظات التوصيل",
+        "items": "المنتجات",
+        "size": "الحجم",
+        "extras": "الإضافات",
+        "quantity": "الكمية",
+        "unitPrice": "سعر الوحدة",
+        "subtotal": "المجموع الفرعي",
+        "deliveryFee": "رسوم التوصيل",
+        "total": "الإجمالي",
+        "paymentStatus": "حالة الدفع",
+        "orderStatus": "حالة الطلب",
+        "notAvailable": "غير متوفر",
+        "paymentStatuses": {
+          "PENDING": "قيد الانتظار",
+          "PAID": "تم الدفع",
+          "FAILED": "فشل الدفع"
+        },
+        "statuses": {
+          "PENDING": "قيد الانتظار",
+          "CONFIRMED": "تم التأكيد",
+          "PREPARING": "جاري التحضير",
+          "OUT_FOR_DELIVERY": "خرج للتوصيل",
+          "DELIVERED": "تم التوصيل",
+          "CANCELLED": "ملغي"
+        }
+      }
+    },
     "menu-items": {
       "createNewMenuItem": "إنشاء عنصر قائمة جديد",
       "addItemSize": "إضافة حجم العنصر",
       "addExtraItem": "إضافة عنصر إضافي",
+      "name": "الاسم",
+      "extraPrice": "السعر الإضافي",
+      "select": "اختر...",
       "menuOption": {
         "name": "الاسم",
         "extraPrice": "السعر الاضافي"
@@ -233,7 +290,143 @@
   "cancel": "الغاء",
   "cart": {
     "title": "عربة التسوق",
-    "noItemsInCart": "لا توجد عناصر في سلة التسوق الخاصة بك. أضف بعضًا"
+    "noItemsInCart": "لا توجد عناصر في سلة التسوق الخاصة بك. أضف بعضًا",
+    "subtotal": "المجموع الفرعي",
+    "delivery": "التوصيل",
+    "total": "الإجمالي",
+    "emptyCart": "لا توجد عناصر في سلة التسوق. أضف بعض العناصر",
+    "size": "الحجم",
+    "extras": "الإضافات"
+  },
+  "orders": {
+    "title": "طلباتي",
+    "orderId": "رقم الطلب",
+    "date": "التاريخ",
+    "total": "الإجمالي",
+    "payment": "الدفع",
+    "status": "الحالة",
+    "noOrders": "لا توجد طلبات"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "phone": "رقم الهاتف",
+    "address": "عنوان الشارع",
+    "building": "المبنى / الشقة",
+    "city": "المدينة / المنطقة",
+    "notes": "ملاحظات التوصيل",
+    "submit": "الدفع",
+    "processing": "جاري المعالجة...",
+    "validation": {
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "أدخل رقم هاتف صحيح",
+      "addressRequired": "عنوان الشارع مطلوب",
+      "addressInvalid": "أدخل عنوان شارع صحيح",
+      "buildingRequired": "المبنى أو رقم الشقة مطلوب",
+      "cityRequired": "المدينة أو المنطقة مطلوبة"
+    },
+    "messages": {
+      "cartEmpty": "السلة فارغة",
+      "orderCreated": "تم إنشاء الطلب بنجاح",
+      "orderFailed": "حدث خطأ أثناء إنشاء الطلب",
+      "orderNotFound": "الطلب غير موجود",
+      "alreadyPaid": "تم دفع هذا الطلب بالفعل",
+      "paymentSuccess": "تم الدفع بنجاح",
+      "paymentFailed": "فشل الدفع"
+    }
+  },
+  "products": {
+    "categories": {
+      "4aa5b5b1-f874-4fe3-a907-8a9a95039b91": "بيتزا اللحوم",
+      "8444194d-b0a5-413d-a762-83d2edd85006": "بيتزا الدجاج"
+    },
+    "sizes": {
+      "cmuiuwxkf002uzsv2yw9zvfn2": "صغير",
+      "cmuiuwxkg002vzsv2mbnjw7oh": "متوسط",
+      "cmuiuwxkg002wzsv2smi4si63": "كبير",
+
+      "cmuiuyegx003azsv23q98ti2z": "صغير",
+      "cmuiuyeg003bzsv25ek714q1": "متوسط",
+      "cmuiuyeg003czsv23h425p46": "كبير",
+
+      "cmuiuwbga002mzsv259cyyctj": "صغير",
+      "cmuiuwbgb002nzsv2bicugesm": "متوسط",
+      "cmuiuwbgb002ozsv2x387kvqs": "كبير",
+
+      "cmuiuxl8v0032zsv29dldek94": "صغير",
+      "cmuiuxl8v0033zsv2wiopxhbq": "متوسط",
+      "cmuiuxl8v0034zsv2m4c155np": "كبير",
+
+      "cmuiuvfxa002ezsv2wt4tsobv": "صغير",
+      "cmuiuvfxb002fzsv2mp6ezkzn": "متوسط",
+      "cmuiuvfxb002gzsv2f0wueibw": "كبير",
+
+      "cmuiuto9l0026zsv26tgd0bwm": "صغير",
+      "cmuiuto9l0027zsv2vw4eqe4t": "متوسط",
+      "cmuiuto9l0028zsv2jhd1oy04": "كبير"
+    },
+    "extras": {
+      "cmuiuwxko002xzsv214z2wqy7": "جبنة",
+      "cmuiuwxko002yzsv2yllyokz4": "بيكون",
+      "cmuiuwxko002zzsv2lei87up8": "بصل",
+      "cmuiuwxko0030zsv2c0846imv": "فلفل",
+      "cmuiuwxko0031zsv26b8kglza": "طماطم",
+
+      "cmuiuyeh9003dzsv24ofwhbo6": "جبنة",
+      "cmuiuyeh9003ezsv2vnx0blet": "بيكون",
+      "cmuiuyeh9003fzsv20vx94op3": "بصل",
+      "cmuiuyeh9003gzsv26bwozsxr": "فلفل",
+      "cmuiuyeh9003hzsv2mac1hhia": "طماطم",
+
+      "cmuiuwbgo002pzsv2oe6yogok": "جبنة",
+      "cmuiuwbgo002qzsv23n7z5w3i": "بيكون",
+      "cmuiuwbgo002rzsv2u18er0l3": "بصل",
+      "cmuiuwbgo002szsv2b3rzz39h": "فلفل",
+      "cmuiuwbgo002tzsv2ca3uygfz": "طماطم",
+
+      "cmuiuxl960035zsv20tmdf7w4": "جبنة",
+      "cmuiuxl960036zsv2dp9oh43i": "بيكون",
+      "cmuiuxl960037zsv2tuyj7z0c": "بصل",
+      "cmuiuxl960038zsv2cqnnl7ef": "فلفل",
+      "cmuiuxl960039zsv260mcl3qf": "طماطم",
+
+      "cmuiuvfxi002hzsv2mc9vupr4": "جبنة",
+      "cmuiuvfxi002izsv2ay9zwrs4": "بيكون",
+      "cmuiuvfxi002jzsv2hvymh7pa": "بصل",
+      "cmuiuvfxi002kzsv2nttlz3fz": "فلفل",
+      "cmuiuvfxi002lzsv2gpuc8ydz": "طماطم",
+
+      "cmuiutoa60029zsv2go55tpsv": "جبنة",
+      "cmuiutoa7002azsv2mqefdeox": "بيكون",
+      "cmuiutoa7002bzsv2aoc6oa19": "بصل",
+      "cmuiutoa7002czsv25hsalrns": "فلفل",
+      "cmuiutoa7002dzsv2dzmo2zvi": "طماطم"
+    },
+    "items": {
+      "cmuiu7gtc000ozsv2m5o6kg5h": {
+        "name": "دبل بيبروني",
+        "description": "صلصة طماطم - بيبروني مزدوج"
+      },
+      "cmuiu96y0000xzsv2jmu30qc1": {
+        "name": "فاير سموكي بيف",
+        "description": "صلصة طماطم - لحم تركي - فلفل أخضر - زيتون - صلصة فاير"
+      },
+      "cmuiuasus0016zsv2mwz9s356": {
+        "name": "سموكي تكساس برجر",
+        "description": "صلصة باربكيو - برجر - فلفل أخضر - خيار مخلل - بصل - صلصة سموكي تكساس"
+      },
+      "cmuiue89l001fzsv2ulphujai": {
+        "name": "دجاج باربكيو",
+        "description": "صلصة باربكيو - بصل - فلفل أخضر - فلفل أحمر - دجاج - صلصة باربكيو"
+      },
+      "cmuiuft9e001ozsv2iuebvsuh": {
+        "name": "دجاج فاير",
+        "description": "صلصة طماطم - دجاج - فلفل أحمر - صلصة فاير"
+      },
+      "cmuiuh678001xzsv2wl47dt5d": {
+        "name": "دجاج رانش",
+        "description": "جبنة كريمية - زيتون - فلفل أخضر - فلفل أحمر - دجاج - صلصة رانش"
+      }
+    }
   },
 
   "copyRight": "© 2026 جميع الحقوق محفوظة",

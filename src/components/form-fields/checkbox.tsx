@@ -5,7 +5,7 @@ import { Checkbox as ShadcnCheckbox } from "../ui/checkbox";
 interface Props {
   onClick?: () => void;
   checked?: boolean;
-  label: IFormField["label"];
+  label?: IFormField["label"];
   name: IFormField["name"];
 }
 
