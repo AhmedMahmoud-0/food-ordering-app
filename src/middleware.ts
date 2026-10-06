@@ -71,7 +71,7 @@ export default withAuth(
     // if user loggedin and he isn't admin and try to acess admin route
     if (isAuth && pathname.startsWith(`/${currentLocale}/${Routes.ADMIN}`)) {
       const role = isAuth.role;
-      if (role === "ADMIN") {
+      if (role !== "ADMIN") {
         return NextResponse.redirect(
           new URL(`/${currentLocale}/${Routes.PROFILE}`, request.url),
         );
