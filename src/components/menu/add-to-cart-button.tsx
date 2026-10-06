@@ -160,11 +160,10 @@ function AddToCartButton({
               <Button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full h-10 flex items-center justify-center gap-2"
+                className="w-full h-10 "
               >
                 {translations.menuItem.addToCart}
-                {""}
-                {formatCurrency(totalPrice)}
+                <span>{formatCurrency(totalPrice)}</span>
               </Button>
             ) : (
               <ChooseQuantity
