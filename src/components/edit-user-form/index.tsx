@@ -16,6 +16,7 @@ import Loader from "../ui/loader";
 import { CameraIcon } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useSession } from "next-auth/react";
+import { useParams, useRouter } from "next/navigation";
 
 function EditUserForm({
   translations,
@@ -24,6 +25,8 @@ function EditUserForm({
   translations: Translations;
   user: Session["user"];
 }) {
+  const { locale } = useParams();
+  const router = useRouter();
   const session = useSession();
   const formData = new FormData();
   Object.entries(user).forEach(([key, value]) => {
@@ -61,8 +64,12 @@ function EditUserForm({
         title: state.message,
         className: state.status === 200 ? "text-green-400" : "text-destructive",
       });
+
+      if (state.status === 200) {
+        router.replace(`/${locale}/${Routes.ROOT}`);
+      }
     }
-  }, [pending, state.message, state.status]);
+  }, [locale, pending, router, state.message, state.status]);
 
   return (
     <form action={action} className="flex flex-col md:flex-row gap-10">
