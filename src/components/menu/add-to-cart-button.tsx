@@ -163,6 +163,7 @@ function AddToCartButton({
                 className="w-full h-10 flex items-center justify-center gap-2"
               >
                 {translations.menuItem.addToCart}
+                {""}
                 {formatCurrency(totalPrice)}
               </Button>
             ) : (
