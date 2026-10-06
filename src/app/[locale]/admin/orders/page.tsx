@@ -48,7 +48,7 @@ async function OrdersPage() {
                     <td className="p-4 font-medium">
                       <Link
                         href={`/${locale}/admin/orders/${order.id}`}
-                        className="hover:underline"
+                        className="font-medium underline underline-offset-4 hover:text-primary"
                       >
                         {order.id.slice(0, 8)}
                       </Link>

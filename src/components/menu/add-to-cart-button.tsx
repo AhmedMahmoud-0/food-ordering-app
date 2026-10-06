@@ -197,6 +197,14 @@ function PickSize({
   translations: Translations;
   setSelectedSize: React.Dispatch<React.SetStateAction<Size>>;
 }) {
+  console.log(
+    "SIZES:",
+    sizes.map((size) => ({
+      id: size.id,
+      name: size.name,
+      translation: translations.products.sizes[size.id],
+    })),
+  );
   return (
     <RadioGroup
       value={selectedSize.id}

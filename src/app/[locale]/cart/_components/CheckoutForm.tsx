@@ -17,6 +17,8 @@ import { createOrder } from "@/server/_actions/orders";
 import { toast } from "@/hooks/use-toast";
 import { Translations } from "@/types/translations";
 import { processMockPayment } from "@/server/_actions/payments";
+import { useParams, useRouter } from "next/navigation";
+import { Routes } from "@/constants/enums";
 
 type FormErrors = {
   phone?: string;
@@ -36,6 +38,8 @@ type CheckoutData = {
 };
 
 function CheckoutForm({ translations }: { translations: Translations }) {
+  const { locale } = useParams();
+  const router = useRouter();
   const cart = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
   const totalAmount = getTotalAmount(cart);
@@ -155,6 +159,7 @@ function CheckoutForm({ translations }: { translations: Translations }) {
         title: checkout.messages.paymentSuccess,
         className: "text-green-400",
       });
+      router.replace(`/${locale}/${Routes.ROOT}`);
     } catch (error) {
       console.error(error);
 
