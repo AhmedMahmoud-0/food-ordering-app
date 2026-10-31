@@ -46,6 +46,8 @@ function DeleteUserButton({ userId }: { userId: string }) {
     <Button
       type="button"
       variant="outline"
+      size="icon"
+      className="size-10 rounded-xl border-border/80 bg-card text-muted-foreground shadow-none hover:border-destructive/30 hover:bg-destructive/5 hover:text-destructive"
       disabled={state.pending}
       onClick={() => handleDelete(userId)}
     >

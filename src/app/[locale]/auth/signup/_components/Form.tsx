@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "../../_components/AuthForm.module.css";
+
 import FormFields from "@/components/form-fields/form-fields";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/ui/loader";
@@ -45,11 +47,11 @@ function Form({ translations }: { translations: Translations }) {
     }
   }, [locale, router, state.formData, state.message, state.status]);
   return (
-    <form action={action}>
+    <form action={action} className={styles.form}>
       {getFormFields().map((field: IFormField) => {
         const fieldValue = state.formData?.get(field.name) as string;
         return (
-          <div key={field.name} className="mb-3">
+          <div key={field.name} className={styles.field}>
             <FormFields
               {...field}
               error={state.error}
@@ -58,7 +60,7 @@ function Form({ translations }: { translations: Translations }) {
           </div>
         );
       })}
-      <Button type="submit" disabled={pending} className="w-full">
+      <Button type="submit" disabled={pending} className={styles.submitButton}>
         {pending ? <Loader /> : translations.auth.register.submit}
       </Button>
     </form>

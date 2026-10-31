@@ -19,6 +19,7 @@ import { Translations } from "@/types/translations";
 import { processMockPayment } from "@/server/_actions/payments";
 import { useParams, useRouter } from "next/navigation";
 import { Routes } from "@/constants/enums";
+import { ClipboardCheck, CreditCard, MapPin } from "lucide-react";
 
 type FormErrors = {
   phone?: string;
@@ -176,114 +177,135 @@ function CheckoutForm({ translations }: { translations: Translations }) {
     }
   };
 
+  if (!cart.length) return null;
+
+  const fieldClassName = "h-12 rounded-xl border-border/80 bg-white px-4 shadow-none";
+  const errorClassName = "rounded-lg bg-destructive/5 px-3 py-2 text-xs font-medium text-destructive";
+
   return (
-    cart &&
-    cart.length > 0 && (
-      <div className="grid gap-6 rounded-md bg-gray-100 p-4">
-        <h2 className="text-2xl font-semibold text-black">{checkout.title}</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-4">
-            <div className="grid gap-1">
-              <Label htmlFor="phone" className="text-accent">
-                {checkout.phone}
-              </Label>
-
-              <Input
-                id="phone"
-                placeholder={checkout.phone}
-                type="text"
-                name="phone"
-                aria-invalid={!!errors.phone}
-              />
-
-              {errors.phone && (
-                <p className="text-sm text-red-500">{errors.phone}</p>
-              )}
-            </div>
-
-            <div className="grid gap-1">
-              <Label htmlFor="address" className="text-accent">
-                {checkout.address}
-              </Label>
-
-              <Textarea
-                id="address"
-                placeholder={checkout.address}
-                name="address"
-                className="resize-none"
-                aria-invalid={!!errors.address}
-              />
-
-              {errors.address && (
-                <p className="text-sm text-red-500">{errors.address}</p>
-              )}
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <div className="grid gap-1">
-                <Label htmlFor="building" className="text-accent">
-                  {checkout.building}
-                </Label>
-
-                <Input
-                  type="text"
-                  id="building"
-                  placeholder={checkout.building}
-                  name="building"
-                  aria-invalid={!!errors.building}
-                />
-
-                {errors.building && (
-                  <p className="text-sm text-red-500">{errors.building}</p>
-                )}
-              </div>
-
-              <div className="grid gap-1">
-                <Label htmlFor="city" className="text-accent">
-                  {checkout.city}
-                </Label>
-
-                <Input
-                  type="text"
-                  id="city"
-                  placeholder={checkout.city}
-                  name="city"
-                  aria-invalid={!!errors.city}
-                />
-
-                {errors.city && (
-                  <p className="text-sm text-red-500">{errors.city}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid gap-1">
-              <Label htmlFor="notes" className="text-accent">
-                {checkout.notes}
-              </Label>
-
-              <Textarea
-                id="notes"
-                placeholder={checkout.notes}
-                name="notes"
-                className="resize-none"
-              />
-            </div>
-
-            {errors.form && (
-              <p className="text-sm text-red-500">{errors.form}</p>
-            )}
-
-            <Button type="submit" className="h-10" disabled={isLoading}>
-              {isLoading
-                ? checkout.processing
-                : `${checkout.submit} ${formatCurrency(totalAmount)}`}
-            </Button>
+    <section className="surface-card overflow-hidden lg:sticky lg:top-28">
+      <div className="border-b border-border/80 bg-secondary/35 px-5 py-5 sm:px-7">
+        <div className="flex items-center gap-3">
+          <span className="flex size-11 items-center justify-center rounded-xl bg-white text-primary shadow-sm">
+            <ClipboardCheck className="size-5" aria-hidden="true" />
+          </span>
+          <div>
+            <h2 className="text-lg font-extrabold text-foreground sm:text-xl">
+              {checkout.title}
+            </h2>
+            <p className="mt-0.5 text-xs font-medium text-muted-foreground">
+              {checkout.address}
+            </p>
           </div>
-        </form>
+        </div>
       </div>
-    )
+
+      <form onSubmit={handleSubmit} className="p-5 sm:p-7">
+        <div className="mb-6 flex items-center gap-2 text-sm font-extrabold text-foreground">
+          <MapPin className="size-4 text-primary" aria-hidden="true" />
+          {checkout.address}
+        </div>
+
+        <div className="grid gap-5">
+          <div className="grid gap-2">
+            <Label htmlFor="phone" className="text-sm font-bold text-foreground">
+              {checkout.phone}
+            </Label>
+            <Input
+              id="phone"
+              placeholder={checkout.phone}
+              type="text"
+              name="phone"
+              aria-invalid={!!errors.phone}
+              className={fieldClassName}
+            />
+            {errors.phone && <p className={errorClassName}>{errors.phone}</p>}
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="address" className="text-sm font-bold text-foreground">
+              {checkout.address}
+            </Label>
+            <Textarea
+              id="address"
+              placeholder={checkout.address}
+              name="address"
+              aria-invalid={!!errors.address}
+              className="min-h-24 resize-y rounded-xl border-border/80 bg-white px-4 py-3 shadow-none"
+            />
+            {errors.address && <p className={errorClassName}>{errors.address}</p>}
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid gap-2">
+              <Label htmlFor="building" className="text-sm font-bold text-foreground">
+                {checkout.building}
+              </Label>
+              <Input
+                type="text"
+                id="building"
+                placeholder={checkout.building}
+                name="building"
+                aria-invalid={!!errors.building}
+                className={fieldClassName}
+              />
+              {errors.building && <p className={errorClassName}>{errors.building}</p>}
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="city" className="text-sm font-bold text-foreground">
+                {checkout.city}
+              </Label>
+              <Input
+                type="text"
+                id="city"
+                placeholder={checkout.city}
+                name="city"
+                aria-invalid={!!errors.city}
+                className={fieldClassName}
+              />
+              {errors.city && <p className={errorClassName}>{errors.city}</p>}
+            </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="notes" className="text-sm font-bold text-foreground">
+              {checkout.notes}
+            </Label>
+            <Textarea
+              id="notes"
+              placeholder={checkout.notes}
+              name="notes"
+              className="min-h-20 resize-y rounded-xl border-border/80 bg-white px-4 py-3 shadow-none"
+            />
+          </div>
+
+          {errors.form && <p className={errorClassName}>{errors.form}</p>}
+
+          <div className="mt-1 rounded-2xl border border-border/80 bg-secondary/35 p-4">
+            <div className="flex items-center justify-between gap-4">
+              <span className="flex items-center gap-2 text-sm font-bold text-muted-foreground">
+                <CreditCard className="size-4" aria-hidden="true" />
+                {translations.cart.total}
+              </span>
+              <strong className="text-xl font-black tabular-nums text-foreground">
+                {formatCurrency(totalAmount)}
+              </strong>
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            className="h-13 w-full rounded-xl text-sm font-extrabold shadow-lg shadow-primary/15"
+            disabled={isLoading}
+          >
+            {isLoading
+              ? checkout.processing
+              : `${checkout.submit} ${formatCurrency(totalAmount)}`}
+          </Button>
+        </div>
+      </form>
+    </section>
   );
 }
 

@@ -102,33 +102,37 @@ function AddToCartButton({
       <form>
         <DialogTrigger
           render={
-            <Button
-              type="button"
-              size="lg"
-              className="mt-4 text-white rounded-full px-8!"
-            >
+            <Button type="button" size="lg" className="product-add-button">
               <span>{translations.menuItem.addToCart}</span>
             </Button>
           }
         />
 
-        <DialogContent className="sm:max-w-106.25 max-h-[80vh] overflow-y-auto">
-          <DialogHeader className="flex items-center">
-            <Image src={item.image} alt={item.name} width={200} height={200} />
+        <DialogContent className="menu-config-dialog">
+          <DialogHeader className="menu-config-header">
+            <div className="menu-config-image-wrap">
+              <Image
+                src={item.image}
+                alt={translations.products.items[item.id]?.name ?? item.name}
+                width={200}
+                height={200}
+                className="menu-config-image"
+              />
+            </div>
 
-            <DialogTitle>
+            <DialogTitle className="menu-config-title">
               {translations.products.items[item.id]?.name ?? item.name}
             </DialogTitle>
 
-            <DialogDescription className="text-center">
+            <DialogDescription className="menu-config-description">
               {translations.products.items[item.id]?.description ??
                 item.description}
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-10">
-            <div className="space-y-4 text-center">
-              <Label htmlFor="pick-size" className="block">
+          <div className="menu-config-options">
+            <section className="menu-option-section">
+              <Label htmlFor="pick-size" className="menu-option-title">
                 {translations.menuItem.pickYourSize}
               </Label>
 
@@ -139,10 +143,10 @@ function AddToCartButton({
                 setSelectedSize={setSelectedSize}
                 translations={translations}
               />
-            </div>
+            </section>
 
-            <div className="space-y-4 text-center">
-              <Label htmlFor="add-extras" className="block">
+            <section className="menu-option-section">
+              <Label htmlFor="add-extras" className="menu-option-title">
                 {translations.menuItem.anyExtras}
               </Label>
 
@@ -152,17 +156,17 @@ function AddToCartButton({
                 setSelectedExtras={setSelectedExtras}
                 translations={translations}
               />
-            </div>
+            </section>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="menu-config-footer">
             {quantity === 0 ? (
               <Button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full h-10 "
+                className="menu-config-submit"
               >
-                {translations.menuItem.addToCart}
+                <span>{translations.menuItem.addToCart}</span>
                 <span>{formatCurrency(totalPrice)}</span>
               </Button>
             ) : (
@@ -197,14 +201,6 @@ function PickSize({
   translations: Translations;
   setSelectedSize: React.Dispatch<React.SetStateAction<Size>>;
 }) {
-  console.log(
-    "SIZES:",
-    sizes.map((size) => ({
-      id: size.id,
-      name: size.name,
-      translation: translations.products.sizes[size.id],
-    })),
-  );
   return (
     <RadioGroup
       value={selectedSize.id}
@@ -215,25 +211,29 @@ function PickSize({
           setSelectedSize(size);
         }
       }}
-      className="flex flex-col gap-3 w-full max-w-xs mx-auto"
+      className="menu-size-list"
     >
       {sizes.map((size) => (
-        <div key={size.id} className="flex items-center gap-3 w-full">
+        <div
+          key={size.id}
+          className={`menu-size-option${selectedSize.id === size.id ? " is-selected" : ""}`}
+        >
           <RadioGroupItem
             value={size.id}
             id={size.id}
-            className="border-primary text-primary focus-visible:ring-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
+            className="menu-size-radio"
           />
 
           <Label
+            htmlFor={size.id}
             onClick={() => setSelectedSize(size)}
-            className="flex-1 flex justify-between items-center cursor-pointer font-medium text-sm"
+            className="menu-option-label"
           >
             <span className="capitalize">
               {translations.products.sizes[size.id] ?? size.name}
             </span>
 
-            <span className="text-muted-foreground">
+            <span className="menu-option-price">
               {formatCurrency(+size.price + +item.basePrice)}
             </span>
           </Label>
@@ -262,32 +262,36 @@ function Extras({
     }
   };
 
-  return extras.map((extra) => (
-    <div
-      key={extra.id}
-      className="flex items-center gap-3 border border-gray-100 rounded-md p-4 w-full"
-    >
-      <Checkbox
-        id={extra.id}
-        onCheckedChange={() => handleExtra(extra)}
-        checked={Boolean(selectedExtras.find((e) => e.id === extra.id))}
-        className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:ring-primary h-4 w-4 rounded"
-      />
+  return extras.map((extra) => {
+    const isSelected = Boolean(selectedExtras.find((e) => e.id === extra.id));
 
-      <Label
-        onClick={() => handleExtra(extra)}
-        className="flex-1 flex justify-between items-center text-base text-foreground font-semibold cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+    return (
+      <div
+        key={extra.id}
+        className={`menu-extra-option${isSelected ? " is-selected" : ""}`}
       >
-        <span className="capitalize">
-          {translations.products.extras[extra.id] ?? extra.name}
-        </span>
+        <Checkbox
+          id={extra.id}
+          onCheckedChange={() => handleExtra(extra)}
+          checked={isSelected}
+          className="menu-extra-checkbox"
+        />
 
-        <span className="text-muted-foreground text-sm font-medium">
-          {formatCurrency(extra.price)}
-        </span>
-      </Label>
-    </div>
-  ));
+        <Label
+          onClick={() => handleExtra(extra)}
+          className="menu-option-label"
+        >
+          <span className="capitalize">
+            {translations.products.extras[extra.id] ?? extra.name}
+          </span>
+
+          <span className="menu-option-price">
+            {formatCurrency(extra.price)}
+          </span>
+        </Label>
+      </div>
+    );
+  });
 }
 
 const ChooseQuantity = ({
@@ -308,25 +312,25 @@ const ChooseQuantity = ({
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex items-center flex-col gap-2 mt-4 w-full">
-      <div className="flex items-center justify-center gap-2">
+    <div className="menu-quantity-control">
+      <div className="menu-quantity-row">
         <Button
           type="button"
           variant="outline"
+          className="menu-quantity-button"
           onClick={() => dispatch(removeCartItem({ id: cartItemId }))}
         >
           -
         </Button>
 
-        <div>
-          <span className="text-black">
-            {quantity} {translations.menuItem.inCart}
-          </span>
-        </div>
+        <span className="menu-quantity-value">
+          {quantity} {translations.menuItem.inCart}
+        </span>
 
         <Button
           type="button"
           variant="outline"
+          className="menu-quantity-button"
           onClick={() =>
             dispatch(
               addCartItem({
@@ -348,6 +352,8 @@ const ChooseQuantity = ({
       <Button
         type="button"
         size="sm"
+        variant="ghost"
+        className="menu-quantity-remove"
         onClick={() => dispatch(removeItemFromCart({ id: cartItemId }))}
       >
         {translations.menuItem.remove}

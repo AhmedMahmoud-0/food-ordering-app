@@ -11,6 +11,7 @@ export async function generateStaticParams() {
 
   return products.map((product) => ({ productId: product.id }));
 }
+
 async function EditProductPage({
   params,
 }: {
@@ -27,8 +28,12 @@ async function EditProductPage({
 
   return (
     <main>
-      <section>
-        <div className="container">
+      <section className="py-8 md:py-10">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-8">
+            <span className="section-eyebrow">{translations.admin.tabs.menuItems}</span>
+            <h1 className="section-title">{translations.edit}</h1>
+          </div>
           <Form
             categories={categories}
             translations={translations}

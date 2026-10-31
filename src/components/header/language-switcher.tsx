@@ -20,6 +20,7 @@ const LanguageSwitcher = () => {
       {locale === Languages.ARABIC ? (
         <Button
           variant="outline"
+          className="language-button"
           onClick={() => switchLanguage(Languages.ENGLISH)}
         >
           English
@@ -27,6 +28,7 @@ const LanguageSwitcher = () => {
       ) : (
         <Button
           variant="outline"
+          className="language-button"
           onClick={() => switchLanguage(Languages.ARABIC)}
         >
           العربية

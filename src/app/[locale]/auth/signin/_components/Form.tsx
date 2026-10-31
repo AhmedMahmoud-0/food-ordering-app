@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "../../_components/AuthForm.module.css";
+
 import FormFields from "@/components/form-fields/form-fields";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/ui/loader";
@@ -63,13 +65,13 @@ function Form({ translations }: { translations: Translations }) {
     }
   };
   return (
-    <form onSubmit={onSubmit} ref={formRef}>
+    <form onSubmit={onSubmit} ref={formRef} className={styles.form}>
       {getFormFields().map((field: IFormField) => (
-        <div key={field.name} className="mb-3">
+        <div key={field.name} className={styles.field}>
           <FormFields {...field} error={error} />
         </div>
       ))}
-      <Button type="submit" disabled={isLoading} className="w-full">
+      <Button type="submit" disabled={isLoading} className={styles.submitButton}>
         {isLoading ? <Loader /> : translations.auth.login.submit}
       </Button>
     </form>

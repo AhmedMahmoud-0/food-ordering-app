@@ -10,7 +10,7 @@ function Menu({
   translations: Translations;
 }) {
   return items.length > 0 ? (
-    <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <ul className="product-grid">
       {items.map((item, index) => (
         <MenuItem
           key={item.id}
@@ -21,7 +21,9 @@ function Menu({
       ))}
     </ul>
   ) : (
-    <p className="text-accent text-center">No Products Found</p>
+    <p className="rounded-2xl border border-dashed border-border px-6 py-10 text-center text-muted-foreground">
+      {translations.noProductsFound}
+    </p>
   );
 }
 

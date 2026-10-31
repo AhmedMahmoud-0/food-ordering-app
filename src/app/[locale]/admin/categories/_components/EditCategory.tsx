@@ -27,6 +27,7 @@ type InitialStateType = {
   error?: ValidationError;
   status?: number | null;
 };
+
 const initialState: InitialStateType = {
   message: "",
   error: {},
@@ -57,45 +58,51 @@ function EditCategory({
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button variant="outline">
-          <EditIcon />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-106.25">
+      <DialogTrigger
+        render={
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label={translations.admin.categories.form.editName}
+            className="size-10 rounded-xl border-border/80 bg-card text-muted-foreground shadow-none hover:border-primary/25 hover:bg-primary/5 hover:text-primary"
+          >
+            <EditIcon className="size-4" />
+          </Button>
+        }
+      />
+      <DialogContent className="rounded-3xl border-border/80 p-6 sm:max-w-lg sm:p-8">
         <DialogHeader>
           <DialogTitle
-            className={
-              locale === Languages.ARABIC ? "text-right!" : "text-left!"
-            }
+            className={`text-lg font-extrabold ${
+              locale === Languages.ARABIC ? "text-right" : "text-left"
+            }`}
           >
             {translations.admin.categories.form.editName}
           </DialogTitle>
         </DialogHeader>
         <form action={action} className="pt-4">
-          <div className="flex items-center gap-4">
-            <Label htmlFor="category-name">
+          <div className="grid gap-3">
+            <Label htmlFor="categoryName" className="text-sm font-bold text-foreground">
               {translations.admin.categories.form.name.label}
             </Label>
-            <div className="flex-1 relative">
+            <div className="grid gap-2">
               <Input
                 type="text"
                 id="categoryName"
                 name="categoryName"
                 defaultValue={category.name}
-                placeholder={
-                  translations.admin.categories.form.name.placeholder
-                }
+                placeholder={translations.admin.categories.form.name.placeholder}
+                className="h-12 rounded-xl bg-background/80 px-4"
               />
               {state.error?.categoryName && (
-                <p className="text-sm text-destructive absolute top-12">
-                  {state.error?.categoryName}
+                <p className="text-sm font-medium text-destructive">
+                  {state.error.categoryName}
                 </p>
               )}
             </div>
           </div>
-          <DialogFooter className="mt-10">
-            <Button type="submit" disabled={pending}>
+          <DialogFooter className="mt-7">
+            <Button type="submit" disabled={pending} className="h-11 rounded-xl px-7 font-extrabold">
               {pending ? <Loader /> : translations.save}
             </Button>
           </DialogFooter>

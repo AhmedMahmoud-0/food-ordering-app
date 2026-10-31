@@ -31,7 +31,7 @@ function SelectCategory({
   const { locale } = useParams();
   return (
     <>
-      <Label htmlFor="categoryId" className="capitalize text-black block mb-3">
+      <Label htmlFor="categoryId" className="mb-2 block text-sm font-bold text-foreground">
         {translations.category}
       </Label>
       <Select
@@ -44,19 +44,19 @@ function SelectCategory({
         defaultValue={categoryId}
       >
         <SelectTrigger
-          className={`w-48 h-10 bg-gray-100 border-none mb-4 focus:ring-0 ${
+          className={`h-11 w-full max-w-sm rounded-xl border-border/80 bg-background/80 focus:ring-0 ${
             locale === Languages.ARABIC ? "flex-row-reverse" : "flex-row"
           }`}
         >
           <SelectValue>{currentItem?.name}</SelectValue>
         </SelectTrigger>
-        <SelectContent className="border-none z-50 bg-gray-100">
-          <SelectGroup className="bg-background text-accent z-50">
+        <SelectContent className="z-50 rounded-xl border-border/80 bg-card">
+          <SelectGroup className="z-50 bg-card text-foreground">
             {categories.map((category) => (
               <SelectItem
                 key={category.id}
                 value={category.id}
-                className="hover:bg-primary! hover:text-white! text-accent! bg-transparent!"
+                className="bg-transparent! text-foreground! hover:bg-primary! hover:text-white!"
               >
                 {category.name}
               </SelectItem>

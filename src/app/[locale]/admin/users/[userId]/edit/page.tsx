@@ -19,13 +19,19 @@ async function EditUserPage({
   const { locale, userId } = await params;
   const translations = await getTrans(locale);
   const user = await getUser(userId);
+
   if (!user) {
     redirect(`/${locale}/${Routes.ADMIN}/${Pages.USERS}`);
   }
+
   return (
     <main>
-      <section className="section-gap">
-        <div className="container">
+      <section className="py-8 md:py-10">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-8">
+            <span className="section-eyebrow">{translations.admin.tabs.users}</span>
+            <h1 className="section-title">{translations.edit}</h1>
+          </div>
           <EditUserForm translations={translations} user={user} />
         </div>
       </section>

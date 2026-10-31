@@ -18,16 +18,22 @@ async function NewProductPage() {
     redirect(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`);
   }
 
-  if (session && session.user.role !== UserRole.ADMIN) {
+  if (session.user.role !== UserRole.ADMIN) {
     redirect(`/${locale}/${Routes.PROFILE}`);
   }
+
   if (!categories || categories.length === 0) {
     redirect(`/${locale}/${Routes.ADMIN}/${Pages.CATEGORIES}`);
   }
+
   return (
     <main>
-      <section className="section-gap">
-        <div className="container">
+      <section className="py-8 md:py-10">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-8">
+            <span className="section-eyebrow">{translations.admin.tabs.menuItems}</span>
+            <h1 className="section-title">{translations.admin["menu-items"].createNewMenuItem}</h1>
+          </div>
           <Form translations={translations} categories={categories} />
         </div>
       </section>

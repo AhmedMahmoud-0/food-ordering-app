@@ -95,7 +95,7 @@ function Form({
     }
   }, [pending, state.message, state.status]);
   return (
-    <form action={action} className="flex flex-col md:flex-row gap-10">
+    <form action={action} className="form-surface grid gap-8 lg:grid-cols-[minmax(230px,0.62fr)_minmax(0,1.38fr)] lg:items-start lg:gap-10">
       <div>
         <UploadImage
           selectedImage={selectedImage}
@@ -166,23 +166,18 @@ const UploadImage = ({
     }
   };
   return (
-    <div className="group mx-auto md:mx-0 relative w-50 h-50 overflow-hidden rounded-full">
+    <div className="group relative mx-auto aspect-square w-full max-w-48 shrink-0 overflow-hidden rounded-[1.5rem] border-2 border-dashed border-border/80 bg-gradient-to-br from-secondary to-background shadow-inner lg:mx-0">
       {selectedImage && (
         <Image
           src={selectedImage}
           alt="Add Product Image"
           width={200}
           height={200}
-          className="rounded-full object-cover"
+          className="size-full rounded-[1.4rem] object-contain p-3"
         />
       )}
-      <div
-        className={`${
-          selectedImage
-            ? "group-hover:opacity-[1] opacity-0  transition-opacity duration-200"
-            : ""
-        } absolute top-0 left-0 w-full h-full bg-gray-50/40`}
-      >
+      <div className="absolute inset-0 flex items-end justify-end bg-transparent p-3">
+
         <input
           type="file"
           accept="image/*"
@@ -193,9 +188,9 @@ const UploadImage = ({
         />
         <label
           htmlFor="image-upload"
-          className="border rounded-full w-50 h-50 element-center cursor-pointer"
+          className="element-center size-12 cursor-pointer rounded-2xl border border-border/80 bg-card text-primary shadow-lg transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
         >
-          <CameraIcon className="w-8! h-8! text-accent" />
+          <CameraIcon className="size-5" />
         </label>
       </div>
     </div>
@@ -251,7 +246,7 @@ const FormActions = ({
       <div
         className={`${product ? "grid grid-cols-2" : "flex flex-col"} gap-4`}
       >
-        <Button type="submit" disabled={pending}>
+        <Button type="submit" disabled={pending} className="h-12 rounded-xl font-extrabold shadow-[0_8px_18px_rgba(200,59,48,0.14)]">
           {pending ? (
             <Loader />
           ) : product ? (
@@ -263,6 +258,7 @@ const FormActions = ({
         {product && (
           <Button
             variant="outline"
+            className="h-12 rounded-xl border-destructive/30 text-destructive hover:bg-destructive hover:text-white"
             disabled={state.pending}
             onClick={() => handleDelete(product.id)}
           >
@@ -273,7 +269,7 @@ const FormActions = ({
 
       <Link
         href={`/${locale}/${Routes.ADMIN}/${Pages.MENU_ITEMS}`}
-        className={`w-full mt-4 ${buttonVariants({ variant: "outline" })}`}
+        className={`mt-3 h-12 w-full rounded-xl border-border/80 font-bold ${buttonVariants({ variant: "outline" })}`}
       >
         {translations.cancel}
       </Link>
@@ -291,9 +287,9 @@ const AddSize = ({
   translations: Translations;
 }) => {
   return (
-    <Accordion className="bg-gray-100 rounded-md px-4 w-80 mb-4 ">
+    <Accordion className="mb-4 w-full rounded-2xl border border-border/80 bg-card px-4 shadow-sm">
       <AccordionItem value="item-1" className="border-none">
-        <AccordionTrigger className="text-black text-base font-medium hover:no-underline">
+        <AccordionTrigger className="text-start text-sm font-extrabold text-foreground hover:no-underline">
           {translations.sizes}
         </AccordionTrigger>
         <AccordionContent>
@@ -319,9 +315,9 @@ const AddExtras = ({
   translations: Translations;
 }) => {
   return (
-    <Accordion className="bg-gray-100 rounded-md px-4 w-80 mb-4 ">
+    <Accordion className="mb-4 w-full rounded-2xl border border-border/80 bg-card px-4 shadow-sm">
       <AccordionItem value="item-1" className="border-none">
-        <AccordionTrigger className="text-black text-base font-medium hover:no-underline">
+        <AccordionTrigger className="text-start text-sm font-extrabold text-foreground hover:no-underline">
           {translations.extrasIngredients}
         </AccordionTrigger>
         <AccordionContent>

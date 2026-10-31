@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { deleteCategory } from "../_actions/category";
+import Loader from "@/components/ui/loader";
 
 type StateType = {
   isLoading: boolean;
@@ -20,28 +21,26 @@ function DeleteCategory({ id }: { id: string }) {
 
   const handleDelete = async () => {
     try {
-      setState((prev) => {
-        return { ...prev, isLoading: true };
-      });
+      setState((prev) => ({ ...prev, isLoading: true }));
       const res = await deleteCategory(id);
-      setState((prev) => {
-        return { ...prev, message: res.message, status: res.status };
-      });
+      setState((prev) => ({ ...prev, message: res.message, status: res.status }));
     } catch (error) {
       console.log(error);
     } finally {
-      setState((prev) => {
-        return { ...prev, isLoading: false };
-      });
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
+
   return (
     <Button
-      variant="secondary"
+      type="button"
+      variant="outline"
+      size="icon"
+      className="size-10 rounded-xl border-border/80 bg-card text-muted-foreground shadow-none hover:border-destructive/30 hover:bg-destructive/5 hover:text-destructive"
       disabled={state.isLoading}
       onClick={handleDelete}
     >
-      <Trash2 />
+      {state.isLoading ? <Loader /> : <Trash2 className="size-4" />}
     </Button>
   );
 }

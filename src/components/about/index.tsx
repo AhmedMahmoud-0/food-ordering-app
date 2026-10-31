@@ -7,14 +7,17 @@ async function About() {
   const locale = await getCurrentLocale();
   const { home } = await getTrans(locale);
   const { about } = home;
+
   return (
-    <section className="section-gap" id={Routes.ABOUT}>
-      <div className="container text-center">
-        <MainHeading subTitle={about.ourStory} title={about.aboutUs} />
-        <div className="text-accent max-w-md mx-auto mt-4 flex flex-col gap-4">
-          <p>{about.descriptions.one}</p>
-          <p>{about.descriptions.two}</p>
-          <p>{about.descriptions.three}</p>
+    <section className="home-about-section" id={Routes.ABOUT}>
+      <div className="container">
+        <div className="surface-card home-about-card">
+          <MainHeading subTitle={about.ourStory} title={about.aboutUs} />
+          <div className="home-about-copy">
+            <p>{about.descriptions.one}</p>
+            <p>{about.descriptions.two}</p>
+            <p>{about.descriptions.three}</p>
+          </div>
         </div>
       </div>
     </section>

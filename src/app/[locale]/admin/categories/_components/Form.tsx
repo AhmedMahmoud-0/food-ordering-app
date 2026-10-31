@@ -15,11 +15,13 @@ type InitialStateType = {
   error?: ValidationError;
   status?: number | null;
 };
+
 const initialState: InitialStateType = {
   message: "",
   error: {},
   status: null,
 };
+
 function Form({ translations }: { translations: Translations }) {
   const [state, action, pending] = useActionState(addCategory, initialState);
 
@@ -33,26 +35,30 @@ function Form({ translations }: { translations: Translations }) {
   }, [state.message, state.status]);
 
   return (
-    <form action={action}>
-      <div className="space-y-2">
-        <Label htmlFor="name">
+    <form action={action} className="grid gap-4">
+      <div className="grid gap-2">
+        <Label htmlFor="name" className="text-sm font-bold text-foreground">
           {translations.admin.categories.form.name.label}
         </Label>
-        <div className="flex items-center gap-4">
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            placeholder={translations.admin.categories.form.name.placeholder}
-          />
-          <Button type="submit" size="lg" disabled={pending}>
-            {pending ? <Loader /> : translations.create}
-          </Button>
-        </div>
+        <Input
+          type="text"
+          name="name"
+          id="name"
+          placeholder={translations.admin.categories.form.name.placeholder}
+          className="h-12 rounded-xl bg-background/80 px-4"
+        />
         {state.error?.name && (
-          <p className="text-sm text-destructive">{state.error.name}</p>
+          <p className="text-sm font-medium text-destructive">{state.error.name}</p>
         )}
       </div>
+      <Button
+        type="submit"
+        size="lg"
+        disabled={pending}
+        className="h-12 w-full rounded-xl font-extrabold shadow-[0_8px_18px_rgba(200,59,48,0.15)]"
+      >
+        {pending ? <Loader /> : translations.create}
+      </Button>
     </form>
   );
 }

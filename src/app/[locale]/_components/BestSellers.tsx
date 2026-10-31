@@ -11,9 +11,9 @@ async function BestSellers() {
   const { bestSeller } = translations.home;
 
   return (
-    <section>
+    <section className="page-section best-sellers-section">
       <div className="container">
-        <div className="text-center mb-4">
+        <div className="page-section-heading">
           <MainHeading
             subTitle={bestSeller.checkOut}
             title={bestSeller.OurBestSellers}

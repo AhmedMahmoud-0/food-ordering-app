@@ -3,52 +3,52 @@ import { buttonVariants } from "@/components/ui/button";
 import { Languages, Routes } from "@/constants/enums";
 import { getCurrentLocale } from "@/lib/getCurrentLocale";
 import getTrans from "@/lib/translation";
-import { ArrowRightCircle } from "lucide-react";
+import { ArrowRight, CircleArrowRight } from "lucide-react";
 import Image from "next/image";
 
 async function Hero() {
   const locale = await getCurrentLocale();
   const { home } = await getTrans(locale);
   const { hero } = home;
+
   return (
-    <section className="section-gap">
-      <div className="container grid grid-cols-1 md:grid-cols-2">
-        <div className="md:py-12">
-          <h1 className="text-4xl font-semibold">{hero.title}</h1>
-          <p className="text-accent my-4">{hero.description}</p>
-          <div className="flex items-center gap-4">
+    <section className="hero-section">
+      <div className="container hero-inner">
+        <div className="hero-copy">
+          <h1 className="hero-title">{hero.title}</h1>
+          <p className="hero-description">{hero.description}</p>
+          <div className="hero-actions">
             <Link
               href={`/${Routes.MENU}`}
-              className={`${buttonVariants({
-                size: "lg",
-              })} space-x-2 px-4! rounded-full! uppercase`}
+              className={`${buttonVariants({ size: "lg" })} hero-primary-action !h-[3.25rem] !rounded-full !px-7`}
             >
               {hero.orderNow}
-              <ArrowRightCircle
-                className={`w-5! h-5! ${
-                  locale === Languages.ARABIC ? "rotate-180 " : ""
+              <ArrowRight
+                className={`size-5 ${
+                  locale === Languages.ARABIC ? "rotate-180" : ""
                 }`}
               />
             </Link>
             <Link
               href={`/${Routes.ABOUT}`}
-              className="flex gap-2 items-center text-black hover:text-primary duration-200 transition-colors font-semibold"
+              className="hero-secondary-action"
             >
               {hero.learnMore}
-              <ArrowRightCircle
-                className={`w-5! h-5! ${
-                  locale === Languages.ARABIC ? "rotate-180 " : ""
+              <CircleArrowRight
+                className={`size-5 ${
+                  locale === Languages.ARABIC ? "rotate-180" : ""
                 }`}
               />
             </Link>
           </div>
         </div>
-        <div className="relative hidden md:block">
+
+        <div className="hero-visual">
           <Image
             src="/assets/images/pizza.png"
             alt="Pizza"
             fill
-            className="object-contain"
+            className="hero-pizza-image"
             loading="eager"
             priority
           />
@@ -57,4 +57,5 @@ async function Hero() {
     </section>
   );
 }
+
 export default Hero;

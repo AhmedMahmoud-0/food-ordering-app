@@ -19,12 +19,13 @@ function AuthButtons({
   const router = useRouter();
   const pathname = usePathname();
   const { locale } = useParams();
+
   return (
     <div>
       {session.data?.user && (
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-3">
           <Button
-            className="px-8! rounded-full!"
+            className="h-10 rounded-full px-5! font-bold shadow-sm shadow-primary/15"
             size="lg"
             onClick={() => signOut()}
           >
@@ -33,15 +34,15 @@ function AuthButtons({
         </div>
       )}
       {!session.data?.user && (
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
           <Button
-            className={`${
+            className={`h-10 rounded-full px-4! font-bold hover:bg-secondary hover:text-primary ${
               pathname.startsWith(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`)
-                ? "text-primary"
-                : "text-accent"
-            } hover:text-primary duration-200 transition-colors font-semibold hover:no-underline px-0!`}
+                ? "bg-secondary text-primary"
+                : "text-muted-foreground"
+            }`}
             size="lg"
-            variant="link"
+            variant="ghost"
             onClick={() =>
               router.push(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`)
             }
@@ -49,7 +50,7 @@ function AuthButtons({
             {translations.navbar.login}
           </Button>
           <Button
-            className="px-8! rounded-full!"
+            className="h-10 rounded-full px-5! font-bold shadow-sm shadow-primary/15"
             size="lg"
             onClick={() =>
               router.push(`/${locale}/${Routes.AUTH}/${Pages.Register}`)

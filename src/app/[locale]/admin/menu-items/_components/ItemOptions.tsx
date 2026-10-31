@@ -94,8 +94,8 @@ function ItemOptions({
         <ul>
           {state.map((item, index) => {
             return (
-              <li key={index} className="flex gap-2 mb-2">
-                <div className="space-y-1 basis-1/2">
+              <li key={index} className="mb-3 grid gap-3 rounded-2xl border border-border/80 bg-background/70 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
+                <div className="min-w-0 space-y-2">
                   <Label>{translations.admin["menu-items"].name}</Label>
                   <SelectName
                     item={item}
@@ -106,7 +106,7 @@ function ItemOptions({
                     translations={translations}
                   />
                 </div>
-                <div className="space-y-1 basis-1/2">
+                <div className="min-w-0 space-y-2">
                   <Label>{translations.admin["menu-items"].extraPrice}</Label>
                   <Input
                     type="number"
@@ -116,10 +116,10 @@ function ItemOptions({
                     value={item.price}
                     onChange={(e) => onChange(e, index, "price")}
                     onFocus={(e) => e.currentTarget.select()}
-                    className="bg-white focus:ring-0!"
+                    className="h-11 rounded-xl bg-card focus:ring-0!"
                   />
                 </div>
-                <div className="flex items-end">
+                <div className="flex items-end sm:pb-0.5">
                   <Button
                     type="button"
                     variant="outline"
@@ -137,7 +137,7 @@ function ItemOptions({
         <Button
           type="button"
           variant="outline"
-          className="w-full"
+          className="h-11 w-full rounded-xl border-dashed border-primary/30 bg-primary/5 font-bold text-primary hover:bg-primary/10"
           onClick={addOption}
         >
           <Plus />
@@ -202,7 +202,7 @@ const SelectName = ({
       }
     >
       <SelectTrigger
-        className={` bg-white border-none mb-4 focus:ring-0 ${
+        className={`h-11 w-full rounded-xl border-border/80 bg-background/80 focus:ring-0 ${
           locale === Languages.ARABIC ? "flex-row-reverse" : "flex-row"
         }`}
       >
@@ -210,13 +210,13 @@ const SelectName = ({
           {item.name ? item.name : translations.admin["menu-items"].select}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent className="bg-transparent border-none z-50">
-        <SelectGroup className="bg-background text-accent z-50">
+      <SelectContent className="z-50 rounded-xl border-border/80 bg-card">
+        <SelectGroup className="z-50 bg-card text-foreground">
           {names.map((name, index) => (
             <SelectItem
               key={index}
               value={name}
-              className="hover:bg-primary! hover:text-white! text-accent! bg-transparent!"
+              className="bg-transparent! text-foreground! hover:bg-primary! hover:text-white!"
             >
               {name}
             </SelectItem>

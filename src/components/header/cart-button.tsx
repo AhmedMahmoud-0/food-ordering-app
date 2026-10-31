@@ -1,4 +1,5 @@
 "use client";
+
 import { Routes } from "@/constants/enums";
 import Link from "../link";
 import { ShoppingCartIcon } from "lucide-react";
@@ -15,15 +16,9 @@ function CartButton() {
   const cartQuantity = isHydrated ? gitCartQuantity(cart) : 0;
 
   return (
-    <Link href={`/${Routes.CART}`} className="block relative group ">
-      {isHydrated && (
-        <span className="absolute -top-4 inset-s-4 w-5 h-5 text-sm bg-primary rounded-full text-white text-center">
-          {cartQuantity}
-        </span>
-      )}
-      <ShoppingCartIcon
-        className={`text-accent group-hover:text-primary duration-200 transition-colors w-6! h-6!`}
-      />
+    <Link href={`/${Routes.CART}`} className="cart-button" aria-label="Shopping cart">
+      {isHydrated && <span className="cart-count">{cartQuantity}</span>}
+      <ShoppingCartIcon className="size-5" aria-hidden="true" />
     </Link>
   );
 }

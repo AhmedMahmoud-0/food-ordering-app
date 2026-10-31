@@ -3,11 +3,18 @@ import getTrans from "@/lib/translation";
 
 const Footer = async () => {
   const locale = await getCurrentLocale();
-  const { copyRight } = await getTrans(locale);
+  const { copyRight, logo } = await getTrans(locale);
+
   return (
-    <footer className="border-t p-8 text-center text-accent">
-      <div className="container">
-        <p>{copyRight}</p>
+    <footer className="site-footer">
+      <div className="container footer-inner">
+        <p className="footer-brand">
+          <span className="footer-brand-mark" aria-hidden="true">
+            🍕
+          </span>
+          <span>{logo}</span>
+        </p>
+        <p className="footer-copy">{copyRight}</p>
       </div>
     </footer>
   );

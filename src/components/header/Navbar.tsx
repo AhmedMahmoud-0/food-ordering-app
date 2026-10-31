@@ -6,11 +6,9 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { Menu, XIcon } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
-
 import LanguageSwitcher from "./language-switcher";
 import { Translations } from "@/types/translations";
 import { Session } from "next-auth";
-
 import { UserRole } from "@prisma/client";
 import { useClientSession } from "@/hooks/useClientSession";
 import AuthButtons from "./auth-buttons";
@@ -23,24 +21,23 @@ function Navbar({
   initialSession: Session | null;
 }) {
   const session = useClientSession(initialSession);
-
   const [openMenu, setOpenMenu] = useState(false);
   const { locale } = useParams();
   const pathname = usePathname();
 
   const links = [
     {
-      id: crypto.randomUUID(),
+      id: "menu",
       title: translations.navbar.menu,
       href: Routes.MENU,
     },
     {
-      id: crypto.randomUUID(),
+      id: "about",
       title: translations.navbar.about,
       href: Routes.ABOUT,
     },
     {
-      id: crypto.randomUUID(),
+      id: "contact",
       title: translations.navbar.contact,
       href: Routes.CONTACT,
     },
@@ -49,28 +46,40 @@ function Navbar({
   const isAdmin = session.data?.user.role === UserRole.ADMIN;
 
   return (
-    <nav className="order-last lg:order-0">
+    <nav className="site-nav" aria-label="Main navigation">
       <Button
-        variant="secondary"
-        size="sm"
-        className="lg:hidden"
+        variant="outline"
+        size="icon"
+        className="nav-toggle"
+        aria-label="Open navigation"
+        aria-expanded={openMenu}
         onClick={() => setOpenMenu(true)}
       >
-        <Menu className="w-6! h-6!" />
+        <Menu className="size-5" />
       </Button>
 
+      {openMenu && (
+        <button
+          type="button"
+          className="nav-backdrop"
+          aria-label="Close navigation"
+          onClick={() => setOpenMenu(false)}
+        />
+      )}
+
       <ul
-        className={`fixed lg:static ${
-          openMenu ? "left-0 z-50" : "-left-full"
-        } top-0 px-10 py-20 lg:p-0 bg-background lg:bg-transparent transition-all duration-200 h-full lg:h-auto flex-col lg:flex-row w-full lg:w-auto flex items-start lg:items-center gap-10`}
+        className="mobile-nav-panel"
+        data-open={openMenu ? "true" : "false"}
       >
         <Button
-          variant="secondary"
-          size="sm"
-          className="absolute top-10 right-10 lg:hidden"
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="mobile-nav-close"
+          aria-label="Close navigation"
           onClick={() => setOpenMenu(false)}
         >
-          <XIcon className="w-6! h-6!" />
+          <XIcon className="size-5" />
         </Button>
 
         {links.map((link) => (
@@ -78,10 +87,10 @@ function Navbar({
             <Link
               onClick={() => setOpenMenu(false)}
               href={`/${locale}/${link.href}`}
-              className={`hover:text-primary duration-200 transition-colors font-semibold ${
+              className={`nav-link ${
                 pathname.startsWith(`/${locale}/${link.href}`)
-                  ? "text-primary"
-                  : "text-accent"
+                  ? "nav-link-active"
+                  : ""
               }`}
             >
               {link.title}
@@ -99,15 +108,15 @@ function Navbar({
                     : `/${locale}/${Routes.PROFILE}`
                 }
                 onClick={() => setOpenMenu(false)}
-                className={`${
+                className={`nav-link ${
                   pathname.startsWith(
                     isAdmin
                       ? `/${locale}/${Routes.ADMIN}`
                       : `/${locale}/${Routes.PROFILE}`,
                   )
-                    ? "text-primary"
-                    : "text-accent"
-                } hover:text-primary duration-200 transition-colors font-semibold`}
+                    ? "nav-link-active"
+                    : ""
+                }`}
               >
                 {isAdmin
                   ? translations.navbar.admin
@@ -120,11 +129,11 @@ function Navbar({
                 <Link
                   href={`/${locale}/orders`}
                   onClick={() => setOpenMenu(false)}
-                  className={`${
+                  className={`nav-link ${
                     pathname.startsWith(`/${locale}/orders`)
-                      ? "text-primary"
-                      : "text-accent"
-                  } hover:text-primary duration-200 transition-colors font-semibold`}
+                      ? "nav-link-active"
+                      : ""
+                  }`}
                 >
                   {translations.orders.title}
                 </Link>
@@ -133,7 +142,7 @@ function Navbar({
           </>
         )}
 
-        <li className="lg:hidden flex flex-col gap-4">
+        <li className="mt-2 flex flex-col gap-4 border-t border-border pt-6 lg:hidden">
           <div onClick={() => setOpenMenu(false)}>
             <AuthButtons
               translations={translations}

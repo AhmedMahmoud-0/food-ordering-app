@@ -7,17 +7,20 @@ const Contact = async () => {
   const locale = await getCurrentLocale();
   const { home } = await getTrans(locale);
   const { contact } = home;
+
   return (
-    <section className="section-gap" id={Routes.CONTACT}>
-      <div className="container text-center">
-        <MainHeading
-          subTitle={contact["Don'tHesitate"]}
-          title={contact.contactUs}
-        />
-        <div className="mt-8">
-          <a className="text-4xl underline text-accent" href="tel:+2012121212">
-            +2012121212
-          </a>
+    <section className="home-contact-section" id={Routes.CONTACT}>
+      <div className="container">
+        <div className="surface-card home-contact-card">
+          <MainHeading
+            subTitle={contact["Don'tHesitate"]}
+            title={contact.contactUs}
+          />
+          <div className="mt-2">
+            <a className="contact-phone-link" href="tel:+2012121212">
+              +2012121212
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -79,7 +79,7 @@ function OrderStatusSelect({
         value={status}
         onChange={(event) => handleChange(event.target.value as OrderStatus)}
         disabled={isLoading}
-        className="rounded-md border bg-background px-3 py-2 text-sm"
+        className="h-11 max-w-full rounded-xl border border-border/80 bg-card px-4 text-sm font-bold text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10 disabled:opacity-60"
       >
         {statuses.map((item) => (
           <option key={item} value={item}>

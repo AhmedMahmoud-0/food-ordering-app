@@ -16,14 +16,19 @@ async function AdminPage({ params }: { params: Promise<{ locale: Locale }> }) {
     redirect(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`);
   }
 
-  if (session && session.user.role !== UserRole.ADMIN) {
+  if (session.user.role !== UserRole.ADMIN) {
     redirect(`/${locale}/${Routes.PROFILE}`);
   }
+
   return (
     <main>
-      <section className="section-gap">
-        <div className="container">
-          <EditUserForm user={session?.user} translations={translations} />
+      <section className="py-8 md:py-10">
+        <div className="container admin-shell">
+          <div className="mb-7">
+            <span className="section-eyebrow">{translations.admin.tabs.profile}</span>
+            <h1 className="section-title">{translations.profile.title}</h1>
+          </div>
+          <EditUserForm user={session.user} translations={translations} />
         </div>
       </section>
     </main>
