@@ -15,6 +15,7 @@ export enum Routes {
   CONTACT = "contact",
   AUTH = "auth",
   CART = "cart",
+  ORDERS = "orders",
   PROFILE = "profile",
   ADMIN = "admin",
 }

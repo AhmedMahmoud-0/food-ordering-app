@@ -65,7 +65,7 @@ async function OrderDetailsPage({ params }: OrderDetailsPageProps) {
           {translations.orders.title}
         </Link>
 
-        <div className="mb-7 flex flex-col gap-5 rounded-[1.75rem] border border-border/80 bg-gradient-to-br from-card via-card to-secondary/60 p-6 shadow-[0_14px_38px_rgba(52,35,22,0.055)] sm:p-8 md:flex-row md:items-center md:justify-between">
+        <div className="mb-7 flex flex-col gap-5 rounded-[1.75rem] border border-border/80 bg-linear-to-br from-card via-card to-secondary/60 p-6 shadow-[0_14px_38px_rgba(52,35,22,0.055)] sm:p-8 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0">
             <span className="section-eyebrow inline-flex items-center gap-2">
               <ReceiptText className="size-4" />
@@ -103,23 +103,23 @@ async function OrderDetailsPage({ params }: OrderDetailsPageProps) {
             <dl className="grid gap-5 sm:grid-cols-2">
               <div className="min-w-0">
                 <dt className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{details.phone}</dt>
-                <dd className="break-words text-sm font-semibold text-foreground">{order.phone}</dd>
+                <dd className="wrap-break-word text-sm font-semibold text-foreground">{order.phone}</dd>
               </div>
               <div className="min-w-0 sm:col-span-2">
                 <dt className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{details.address}</dt>
-                <dd className="break-words text-sm font-semibold leading-6 text-foreground">{order.streetAddress}</dd>
+                <dd className="wrap-break-word text-sm font-semibold leading-6 text-foreground">{order.streetAddress}</dd>
               </div>
               <div className="min-w-0">
                 <dt className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{details.building}</dt>
-                <dd className="break-words text-sm font-semibold text-foreground">{order.building}</dd>
+                <dd className="wrap-break-word text-sm font-semibold text-foreground">{order.building}</dd>
               </div>
               <div className="min-w-0">
                 <dt className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{details.city}</dt>
-                <dd className="break-words text-sm font-semibold text-foreground">{order.city}</dd>
+                <dd className="wrap-break-word text-sm font-semibold text-foreground">{order.city}</dd>
               </div>
               <div className="min-w-0 sm:col-span-2">
                 <dt className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{details.notes}</dt>
-                <dd className="break-words text-sm leading-6 text-foreground">{order.deliveryNotes || details.notAvailable}</dd>
+                <dd className="wrap-break-word text-sm leading-6 text-foreground">{order.deliveryNotes || details.notAvailable}</dd>
               </div>
             </dl>
           </section>
