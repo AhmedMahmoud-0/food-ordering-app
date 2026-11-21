@@ -43,6 +43,23 @@ export const getBestSellers = cache(
   { Revalidate: 3600, tags: ["best-sellers"] },
 );
 
+export const getNewArrivals = cache(
+  (limit = 3) => {
+    return db.product.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        sizes: true,
+        extras: true,
+      },
+      take: limit,
+    });
+  },
+  ["new-arrivals"],
+  { Revalidate: 3600, tags: ["new-arrivals"] },
+);
+
 export const getProducts = cache(
   () => {
     const products = db.product.findMany({

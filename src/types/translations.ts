@@ -20,6 +20,10 @@ export type Translations = {
       checkOut: string;
       OurBestSellers: string;
     };
+    newArrivals: {
+      eyebrow: string;
+      title: string;
+    };
     about: {
       ourStory: string;
       aboutUs: string;
@@ -296,5 +300,17 @@ export type Translations = {
   save: string;
   category: string;
   copyRight: string;
+  footer: {
+    eyebrow: string;
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaLink: string;
+    description: string;
+    brandNote: string;
+    explore: string;
+    company: string;
+    orderAndAccount: string;
+    bottomNote: string;
+  };
   noProductsFound: string;
 };

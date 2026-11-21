@@ -7,7 +7,7 @@ import getTrans from "@/lib/translation";
 import { addProductSchema, updateProductSchema } from "@/validations/product";
 
 import { Extra, ExtraIngredients, ProductSizes, Size } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 
 export const addProduct = async (
   args: {
@@ -65,6 +65,7 @@ export const addProduct = async (
       revalidatePath(`/${locale}/${Routes.MENU}`);
       revalidatePath(`/${locale}/${Routes.ADMIN}/${Pages.MENU_ITEMS}`);
       revalidatePath(`/${locale}`);
+      updateTag("new-arrivals");
       return {
         status: 201,
         message: translations.messages.productAdded,
@@ -157,6 +158,7 @@ export const updateProduct = async (
       `/${locale}/${Routes.ADMIN}/${Pages.MENU_ITEMS}/${updatedProduct.id}/${Pages.EDIT}`,
     );
     revalidatePath(`/${locale}`);
+    updateTag("new-arrivals");
     return {
       status: 200,
       message: translations.messages.updateProductSucess,
@@ -203,6 +205,7 @@ export const deleteProduct = async (id: string) => {
       `/${locale}/${Routes.ADMIN}/${Pages.MENU_ITEMS}/${id}/${Pages.EDIT}`,
     );
     revalidatePath(`/${locale}`);
+    updateTag("new-arrivals");
     return {
       status: 200,
       message: translations.messages.deleteProductSucess,

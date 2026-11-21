@@ -346,36 +346,118 @@
 
   .site-footer {
     margin-top: auto;
-    border-top: 1px solid rgb(76 54 37 / 9%);
-    background: #f8f1e9;
+    border-top: 3px solid var(--primary);
+    background: #171513;
+    color: #fffaf4;
   }
 
-  .footer-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding-block: 2.25rem;
-    text-align: center;
+  .footer-main {
+    display: grid;
+    grid-template-columns: minmax(15rem, 1.55fr) repeat(3, minmax(0, 1fr));
+    gap: clamp(1.75rem, 4vw, 4rem);
+    padding-block: 4rem 3.25rem;
   }
 
-  .footer-brand {
+  .footer-brand-block {
+    max-width: 22rem;
+  }
+
+  .footer-brand-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    color: var(--foreground);
-    font-size: 1.05rem;
-    font-weight: 900;
+    gap: 0.75rem;
+    color: #fffaf4;
+    text-decoration: none;
+  }
+
+  .footer-brand-link:hover {
+    color: #fff;
   }
 
   .footer-brand-mark {
-    font-size: 1.2rem;
+    display: inline-grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 0.95rem;
+    background: rgb(255 255 255 / 7%);
+    font-size: 1.35rem;
+  }
+
+  .footer-brand-name {
+    font-size: 1.55rem;
+    font-weight: 950;
+    letter-spacing: -0.045em;
+  }
+
+  .footer-description {
+    max-width: 22rem;
+    margin-top: 1.2rem;
+    color: #b7aea5;
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  .footer-link-group {
+    min-width: 0;
+  }
+
+  .footer-group-title {
+    margin-bottom: 1.2rem;
+    color: #fffaf4;
+    font-size: 0.95rem;
+    font-weight: 900;
+  }
+
+  .footer-link-list {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-link-list a {
+    display: inline-flex;
+    color: #b7aea5;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .footer-link-list a:hover {
+    color: #fffaf4;
+    transform: translateX(3px);
+  }
+
+  html[dir="rtl"] .footer-link-list a:hover {
+    transform: translateX(-3px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgb(255 255 255 / 11%);
   }
 
   .footer-copy {
-    color: #84786d;
-    font-size: 0.82rem;
+    color: #938980;
+    font-size: 0.8rem;
+  }
+
+  .footer-back-home {
+    color: #c9bfb5;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .footer-back-home:hover {
+    color: #fffaf4;
   }
 
   /* Shared section and card styles */
@@ -593,6 +675,11 @@
   .best-sellers-section {
     position: relative;
     background: #fff;
+  }
+
+  .new-arrivals-section {
+    position: relative;
+    background: #fff8f1;
   }
 
   .home-about-section {
@@ -879,9 +966,36 @@ html[lang="en"] div[role="dialog"] button[data-slot="dialog-close"] {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .footer-main {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .footer-brand-block {
+    grid-column: 1 / -1;
+    max-width: 36rem;
+  }
+}
+
 @media (max-width: 767px) {
   .container {
     width: min(100% - 2rem, 80rem);
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
+    padding-block: 3.25rem 2.5rem;
+  }
+
+  .footer-brand-block {
+    grid-column: 1 / -1;
+    max-width: 30rem;
+  }
+
+  .footer-bottom {
+    min-height: 4.25rem;
   }
 
   .header-inner {

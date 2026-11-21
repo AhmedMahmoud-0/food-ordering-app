@@ -23,6 +23,10 @@
     "contact": {
       "Don'tHesitate": "لا تتردد",
       "contactUs": "اتصل بنا"
+    },
+    "newArrivals": {
+      "eyebrow": "إضافات جديدة إلى قائمتنا",
+      "title": "جديد من فرننا"
     }
   },
   "navbar": {
@@ -343,23 +347,18 @@
       "cmuiuwxkf002uzsv2yw9zvfn2": "صغير",
       "cmuiuwxkg002vzsv2mbnjw7oh": "متوسط",
       "cmuiuwxkg002wzsv2smi4si63": "كبير",
-
       "cmuiuyegx003azsv23q98ti2z": "صغير",
       "cmuiuyegx003bzsv25ek714q1": "متوسط",
       "cmuiuyegx003czsv23h425p46": "كبير",
-
       "cmuiuwbga002mzsv259cyyctj": "صغير",
       "cmuiuwbgb002nzsv2bicugesm": "متوسط",
       "cmuiuwbgb002ozsv2x387kvqs": "كبير",
-
       "cmuiuxl8v0032zsv29dldek94": "صغير",
       "cmuiuxl8v0033zsv2wiopxhbq": "متوسط",
       "cmuiuxl8v0034zsv2m4c155np": "كبير",
-
       "cmuiuvfxa002ezsv2wt4tsobv": "صغير",
       "cmuiuvfxb002fzsv2mp6ezkzn": "متوسط",
       "cmuiuvfxb002gzsv2f0wueibw": "كبير",
-
       "cmuiuto9l0026zsv26tgd0bwm": "صغير",
       "cmuiuto9l0027zsv2vw4eqe4t": "متوسط",
       "cmuiuto9l0028zsv2jhd1oy04": "كبير"
@@ -370,31 +369,26 @@
       "cmuiuwxko002zzsv2lei87up8": "بصل",
       "cmuiuwxko0030zsv2c0846imv": "فلفل",
       "cmuiuwxko0031zsv26b8kglza": "طماطم",
-
       "cmuiuyeh9003dzsv24ofwhbo6": "جبنة",
       "cmuiuyeh9003ezsv2vnx0blet": "بيكون",
       "cmuiuyeh9003fzsv20vx94op3": "بصل",
       "cmuiuyeh9003gzsv26bwozsxr": "فلفل",
       "cmuiuyeh9003hzsv2mac1hhia": "طماطم",
-
       "cmuiuwbgo002pzsv2oe6yogok": "جبنة",
       "cmuiuwbgo002qzsv23n7z5w3i": "بيكون",
       "cmuiuwbgo002rzsv2u18er0l3": "بصل",
       "cmuiuwbgo002szsv2b3rzz39h": "فلفل",
       "cmuiuwbgo002tzsv2ca3uygfz": "طماطم",
-
       "cmuiuxl960035zsv20tmdf7w4": "جبنة",
       "cmuiuxl960036zsv2dp9oh43i": "بيكون",
       "cmuiuxl960037zsv2tuyj7z0c": "بصل",
       "cmuiuxl960038zsv2cqnnl7ef": "فلفل",
       "cmuiuxl960039zsv260mcl3qf": "طماطم",
-
       "cmuiuvfxi002hzsv2mc9vupr4": "جبنة",
       "cmuiuvfxi002izsv2ay9zwrs4": "بيكون",
       "cmuiuvfxi002jzsv2hvymh7pa": "بصل",
       "cmuiuvfxi002kzsv2nttlz3fz": "فلفل",
       "cmuiuvfxi002lzsv2gpuc8ydz": "طماطم",
-
       "cmuiutoa60029zsv2go55tpsv": "جبنة",
       "cmuiutoa7002azsv2mqefdeox": "بيكون",
       "cmuiutoa7002bzsv2aoc6oa19": "بصل",
@@ -428,8 +422,19 @@
       }
     }
   },
-
   "copyRight": "© 2026 جميع الحقوق محفوظة",
   "noProductsFound": "لم يتم العثور على منتجات",
-  "noCategoriesFound": "لم يتم العثور على الفئات"
+  "noCategoriesFound": "لم يتم العثور على الفئات",
+  "footer": {
+    "eyebrow": "أكل حلو. ومزاج أحلى.",
+    "ctaTitle": "شريحتك المفضلة الجاية مستنياك.",
+    "ctaDescription": "بيتزا طازجة بمكونات مختارة ونكهات تفرّحك. اكتشف اختيارك اللذيذ لوجبتك القادمة.",
+    "ctaLink": "اكتشف القائمة",
+    "description": "بيتزا طازجة بمكونات مختارة ونكهات تحب مشاركتها. اكتشف وجبتك المفضلة القادمة معنا.",
+    "brandNote": "طازجة من الفرن، وأحلى لما تتشارك.",
+    "explore": "تصفّح الموقع",
+    "company": "تعرّف علينا",
+    "orderAndAccount": "طلباتك وحسابك",
+    "bottomNote": "أوقات أحلى تبدأ بأكل حلو ولمّة أجمل."
+  }
 }
