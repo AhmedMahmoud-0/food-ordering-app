@@ -47,16 +47,19 @@ function Navbar({
 
   return (
     <nav className="site-nav" aria-label="Main navigation">
-      <Button
-        variant="outline"
-        size="icon"
-        className="nav-toggle"
-        aria-label="Open navigation"
-        aria-expanded={openMenu}
-        onClick={() => setOpenMenu(true)}
-      >
-        <Menu className="size-5" />
-      </Button>
+      <div className="flex items-center gap-2 lg:hidden">
+        <Button
+          variant="outline"
+          size="icon"
+          className="nav-toggle"
+          aria-label="Open navigation"
+          aria-expanded={openMenu}
+          onClick={() => setOpenMenu(true)}
+        >
+          <Menu className="size-5" />
+        </Button>
+        <LanguageSwitcher />
+      </div>
 
       {openMenu && (
         <button
@@ -149,7 +152,6 @@ function Navbar({
               initialSession={initialSession}
             />
           </div>
-          <LanguageSwitcher />
         </li>
       </ul>
     </nav>
