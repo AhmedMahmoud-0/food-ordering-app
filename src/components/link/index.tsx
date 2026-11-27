@@ -1,7 +1,7 @@
 "use client";
 
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
+import React, { FC, HTMLAttributes } from "react";
 
 type CustomLinkProps = NextLinkProps & {
   children: React.ReactNode;
@@ -9,26 +9,19 @@ type CustomLinkProps = NextLinkProps & {
   target?: string;
 } & HTMLAttributes<HTMLAnchorElement>;
 
-const Link: FC<CustomLinkProps> = ({ children, href, ...rest }) => {
-  const [prefetching, setPrefetching] = useState(false);
-  const linkRef = useRef<HTMLAnchorElement>(null);
-  const setPrefetchListener = () => {
-    setPrefetching(true);
-  };
-  const removePrefetchListener = () => {
-    setPrefetching(false);
-  };
-  useEffect(() => {
-    const linkElement = linkRef.current;
-    linkElement?.addEventListener("mouseover", setPrefetchListener);
-    linkElement?.addEventListener("mouseleave", removePrefetchListener);
-    return () => {
-      linkElement?.removeEventListener("mouseover", setPrefetchListener);
-      linkElement?.removeEventListener("mouseleave", removePrefetchListener);
-    };
-  }, [prefetching]);
+/**
+ * Shared internal link wrapper.
+ * Prefetch is disabled by default so middleware redirects are not cached
+ * from an earlier prefetch response. Callers can still explicitly override it.
+ */
+const Link: FC<CustomLinkProps> = ({
+  children,
+  href,
+  prefetch = false,
+  ...rest
+}) => {
   return (
-    <NextLink href={href} ref={linkRef} prefetch={prefetching} {...rest}>
+    <NextLink href={href} prefetch={prefetch} {...rest}>
       {children}
     </NextLink>
   );

@@ -19,7 +19,7 @@ async function Hero() {
           <p className="hero-description">{hero.description}</p>
           <div className="hero-actions">
             <Link
-              href={`/${Routes.MENU}`}
+              href={`/${locale}/${Routes.MENU}`}
               className={`${buttonVariants({ size: "lg" })} hero-primary-action !h-[3.25rem] !rounded-full !px-7`}
             >
               {hero.orderNow}
@@ -30,7 +30,7 @@ async function Hero() {
               />
             </Link>
             <Link
-              href={`/${Routes.ABOUT}`}
+              href={`/${locale}/${Routes.ABOUT}`}
               className="hero-secondary-action"
             >
               {hero.learnMore}

@@ -9,14 +9,20 @@ import {
   selectCartHydrated,
   selectCartItems,
 } from "@/redux/features/cart/cartSlice";
+import { useParams } from "next/navigation";
 
 function CartButton() {
+  const { locale } = useParams<{ locale: string }>();
   const cart = useAppSelector(selectCartItems);
   const isHydrated = useAppSelector(selectCartHydrated);
   const cartQuantity = isHydrated ? gitCartQuantity(cart) : 0;
 
   return (
-    <Link href={`/${Routes.CART}`} className="cart-button" aria-label="Shopping cart">
+    <Link
+      href={`/${locale}/${Routes.CART}`}
+      className="cart-button"
+      aria-label="Shopping cart"
+    >
       {isHydrated && <span className="cart-count">{cartQuantity}</span>}
       <ShoppingCartIcon className="size-5" aria-hidden="true" />
     </Link>

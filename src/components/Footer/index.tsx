@@ -54,7 +54,7 @@ const Footer = async () => {
             </p>
           </div>
 
-          <NextLink className={styles.menuCta} href={`/${locale}/menu`}>
+          <NextLink className={styles.menuCta} href={`/${locale}/menu`} prefetch={false}>
             <span>{footer.ctaLink}</span>
             <ArrowUpRight className={styles.ctaIcon} aria-hidden="true" />
           </NextLink>
@@ -62,7 +62,7 @@ const Footer = async () => {
 
         <div className={styles.footerMain}>
           <div className={styles.brandBlock}>
-            <NextLink href={`/${locale}`} className={styles.brandLink}>
+            <NextLink href={`/${locale}`} prefetch={false} className={styles.brandLink}>
               <span className={styles.brandMark} aria-hidden="true">
                 🍕
               </span>
@@ -85,7 +85,7 @@ const Footer = async () => {
               <ul className={styles.linkList}>
                 {group.links.map((link) => (
                   <li key={link.href}>
-                    <NextLink className={styles.footerLink} href={link.href}>
+                    <NextLink className={styles.footerLink} href={link.href} prefetch={false}>
                       <span className={styles.linkMarker} aria-hidden="true">
                         ↗
                       </span>
